@@ -6,13 +6,13 @@ Aplicada no `index.html` principal, disponível em http://127.0.0.1:8765/.
 
 **Presença com peso.**
 
-Seu próximo cliente pode estar indo embora antes de falar com você.
+Seu cliente chega. Mas o que faz ele ficar?
 
-Anúncio que não explica. Site que confunde. Mensagem sem resposta. A GRAVV conecta seus anúncios, seu site e seu atendimento para que o interesse tenha um próximo passo.
+Criamos sites, anúncios e atendimento conectado para sua empresa atrair, responder e acompanhar clientes.
 
-**Convite:** Quero descobrir onde perco clientes.
+**Convite:** Onde estou perdendo clientes?
 
-**Apoio:** Vamos olhar o caminho do seu cliente, do anúncio ao retorno.
+**Apoio:** Descubra o que pode estar travando seus contatos.
 
 ## História visual
 
@@ -40,6 +40,6 @@ Os painéis são uma ilustração do processo, não depoimentos nem uma demonstr
 
 Painéis em quatro colunas quando há espaço e em duas colunas nas larguras menores. Nenhum painel depende de rolagem horizontal. O texto explicativo permanece fora da ilustração para facilitar a leitura.
 
-Implementação: `assets/hero-journey.css`, `assets/hero-journey.js` e seção `#hero` no `index.html`. As demais seções de conteúdo e o formulário foram preservados. O cabeçalho e os botões receberam ajustes de largura para celular.
+Implementação: `assets/hero-journey.css`, `assets/hero-journey.js` e seção `#hero` no `index.html`. A revisão de clareza reduziu o texto principal em aproximadamente 47%, retirou a seção que repetia a jornada e simplificou serviços, método, dúvidas e formulário. As animações e prévias interativas do portfólio foram preservadas.
 
 Verificação: seleção das quatro etapas, navegação por teclado, avanço temporizado, pausa, preferência por movimento reduzido, ativação explícita dos movimentos e ausência de cortes na hero em celular e desktop.
