@@ -19,3 +19,5 @@ Os três projetos têm uma prévia interativa expandida dentro da seção. Apena
 Os blocos entram suavemente ao chegar à tela, uma única vez. As imagens dos trabalhos têm aproximação discreta ao passar o mouse ou focar um link. O conteúdo fica visível mesmo sem JavaScript, e movimentos são desativados quando o navegador solicita redução de movimento. Links têm nomes acessíveis e informam abertura em nova aba.
 
 O portfólio descreve entregas e recursos verificáveis. Não apresenta métricas de venda, depoimentos ou resultados não fornecidos.
+
+As imagens exibidas usam versões WebP otimizadas: aproximadamente 178 KB somadas, frente a 893 KB dos PNGs originais, mantidos como fonte.

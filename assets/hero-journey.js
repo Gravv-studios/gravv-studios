@@ -23,6 +23,9 @@
   let current = -1;
   let queued = false;
   let top = 0;
+  let start = 0;
+  let distance = 1;
+  let lastWidth = innerWidth;
   function select(index) {
     if (index === current) return;
     current = index;
@@ -40,8 +43,7 @@
   }
   function updateScroll() {
     queued = false;
-    const distance = Math.max(1, track.offsetHeight - story.offsetHeight);
-    const amount = Math.max(0, Math.min(1, (top - track.getBoundingClientRect().top) / distance));
+    const amount = Math.max(0, Math.min(1, (scrollY - start) / distance));
     progress.style.transform = `scaleX(${amount})`;
     select(Math.min(cards.length - 1, Math.floor(amount * cards.length)));
   }
@@ -55,8 +57,10 @@
     const preferred = (header?.getBoundingClientRect().height || 88) + 16;
     // Tall or zoomed layouts can scroll upward enough to keep the caption visible.
     top = Math.min(preferred, innerHeight - story.offsetHeight - 16);
-    track.style.height = `${story.offsetHeight + innerHeight * 1.1}px`;
+    distance = Math.max(440, innerHeight * .65);
+    track.style.height = `${story.offsetHeight + distance}px`;
     track.style.setProperty('--story-top', `${top}px`);
+    start = track.getBoundingClientRect().top + scrollY - top;
     drawRoutes();
     queueScroll();
   }
@@ -114,7 +118,12 @@
   setMotion();
   select(0);
   new ResizeObserver(measure).observe(story);
-  window.addEventListener('resize', measure);
+  window.addEventListener('resize', () => {
+    // Mobile browser bars change height during scrolling; avoid moving the timeline.
+    if (innerWidth === lastWidth && innerWidth <= 900) return;
+    lastWidth = innerWidth;
+    measure();
+  });
   window.addEventListener('scroll', queueScroll, { passive: true });
   measure();
 })();

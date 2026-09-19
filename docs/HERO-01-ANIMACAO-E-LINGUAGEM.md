@@ -28,7 +28,7 @@ Os painéis são uma ilustração do processo, não depoimentos nem uma demonstr
 ## Interações
 
 - A rolagem avança automaticamente por anúncio, site, atendimento e acompanhamento. Subir a página reverte as etapas.
-- O quadro permanece visível durante um percurso de aproximadamente uma altura de tela. Não há bloqueio da rolagem, reprodução por tempo ou botão para iniciar.
+- O quadro permanece visível durante um percurso de aproximadamente dois terços de uma altura de tela (mínimo de 440 px). Não há bloqueio da rolagem, reprodução por tempo ou botão para iniciar.
 - O marcador, as conexões, a legenda e a barra de progresso acompanham o percurso.
 - Clique, toque e teclado continuam disponíveis como alternativas para consultar uma etapa. A próxima rolagem retoma a posição do percurso.
 - A preferência por movimentos reduzidos remove transições e efeitos, mantendo as mudanças de etapa pela rolagem.
@@ -41,3 +41,7 @@ Painéis em quatro colunas quando há espaço e em duas colunas nas larguras men
 Implementação: `assets/hero-journey.css`, `assets/hero-journey.js` e seção `#hero` no `index.html`. A revisão de clareza reduziu o texto principal em aproximadamente 47%, retirou a seção que repetia a jornada e simplificou serviços, método, dúvidas e formulário. As animações e prévias interativas do portfólio foram preservadas.
 
 Verificação: avanço e retorno pela rolagem, quadro visível no desktop e no celular, seleção por teclado, preferência por movimentos reduzidos e links de navegação preservados.
+
+## Desempenho
+
+A posição da jornada é medida no redimensionamento, evitando releituras de layout a cada rolagem. Mudanças de altura da barra do navegador móvel não recalculam o percurso. O brilho de fundo permanece estático, sem desfoque, e o progresso lateral usa transformação visual. As fontes externas carregam sem bloquear a primeira exibição. Títulos, cartões e perguntas entram uma única vez com opacidade e deslocamento curto; a preferência por movimento reduzido continua respeitada.

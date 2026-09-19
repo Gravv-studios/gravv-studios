@@ -39,3 +39,7 @@
 **/*.log
 **/.DS_Store
 **/Thumbs.db
+
+!/assets/works/casa-studart.webp
+!/assets/works/faith-360.webp
+!/assets/works/le-cabinet-francais.webp
