@@ -9,9 +9,17 @@
 /assets/*
 !/assets/hero-journey.css
 !/assets/hero-journey.js
+!/assets/site-motion.js
+!/assets/works.css
+!/assets/works/
+/assets/works/*
+!/assets/works/casa-studart.png
+!/assets/works/faith-360.png
+!/assets/works/le-cabinet-francais.png
 !/docs/
 /docs/*
 !/docs/HERO-01-ANIMACAO-E-LINGUAGEM.md
+!/docs/PORTFOLIO.md
 !/GRAVV-KIT-OFICIAL/
 /GRAVV-KIT-OFICIAL/*
 !/GRAVV-KIT-OFICIAL/01-IDENTIDADE/
