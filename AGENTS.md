@@ -2,6 +2,8 @@
 
 ## Projeto
 
+- Ao retomar em outra conta ou computador, leia primeiro `docs/CONTINUIDADE.md`, que registra as decisões aprovadas e as pendências reais.
+
 - Site principal: `index.html`, com os complementos em `assets/`.
 - Repositório: `https://github.com/Gravv-studios/gravv-studios.git`.
 - Preserve a identidade GRAVV e consulte a skill `gravv-site-system` quando disponível.
@@ -21,7 +23,7 @@ O usuário autorizou commits e envio ao repositório quando forem concluídas al
 
 Não criar agendamento, heartbeat, polling, watcher, cron ou atualização a cada dez minutos. A sincronização acontece como parte da conclusão de uma edição solicitada; não existe processo de monitoramento em segundo plano. Alterações feitas fora de uma tarefa são enviadas quando o usuário solicitar sua sincronização.
 
-Não enviar credenciais, arquivos de clientes, materiais internos, backups, relatórios de verificação ou a pasta inteira do workspace. Não ativar hospedagem ou publicação externa sem solicitação específica.
+Não enviar credenciais, arquivos de clientes, materiais internos, backups, relatórios de verificação ou a pasta inteira do workspace. A publicação na Vercel já foi autorizada e está conectada à branch `main`; confira https://gravv-studios.vercel.app/ após os envios. Não criar hospedagem adicional sem solicitação específica.
 
 ## Verificação
 
