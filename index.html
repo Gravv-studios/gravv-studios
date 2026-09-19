@@ -807,6 +807,7 @@
   <script src="assets/hero-journey.js" defer></script>
   <link rel="stylesheet" href="assets/works.css">
   <script src="assets/site-motion.js" defer></script>
+  <script src="assets/work-player.js" defer></script>
 </head>
 <body>
 
@@ -1183,6 +1184,18 @@
           <h2 class="section-headline-large" id="works-title">PRESENÇA QUE<br>SAI DO PAPEL.</h2>
           <p class="works-intro">Cada negócio tem um desafio. Conheça os projetos e as soluções que construímos para cada um.</p>
         </div>
+        <section class="work-player" id="work-player" hidden aria-labelledby="work-player-title" aria-describedby="work-player-hint">
+          <div class="work-player-bar">
+            <h2 id="work-player-title">Explore o projeto</h2>
+            <div class="work-player-actions">
+              <a data-player-external target="_blank" rel="noopener noreferrer">Abrir em outra aba ↗</a>
+              <button type="button" data-player-close aria-label="Fechar prévia do projeto">Fechar ×</button>
+            </div>
+          </div>
+          <p class="work-player-hint" id="work-player-hint"></p>
+          <div class="work-player-stage"></div>
+          <p class="work-player-status" data-player-status role="status"></p>
+        </section>
         <div class="works-grid">
           <article class="work-card work-card--featured">
             <figure>
@@ -1194,6 +1207,7 @@
               <h3>Faith Gôndolas</h3>
               <p>Um produto que a pessoa pode explorar. Catálogo digital com um estúdio 360° para girar a estrutura, aproximar e conhecer os detalhes antes de pedir um orçamento.</p>
               <ul class="work-tags" aria-label="Entregas do projeto Faith"><li>Site e catálogo</li><li>Visualização 3D</li><li>Navegação por produtos</li></ul>
+              <button class="work-launch" type="button" data-work-open="faith" aria-expanded="false" aria-controls="work-player" hidden>Mexer no estúdio 3D <span aria-hidden="true">↗</span></button>
               <a href="https://www.faithgondolas.com.br/secao/porta-paletes.html#estudio-360" target="_blank" rel="noopener noreferrer" aria-label="Explorar o projeto Faith em 3D (abre em nova aba)">Explorar o projeto em 3D <span aria-hidden="true">↗</span></a>
             </div>
           </article>
@@ -1203,6 +1217,7 @@
             <h3>Casa Studart</h3>
             <p>A história da marca e a coleção no mesmo lugar. Uma apresentação que valoriza cada rótulo e aproxima o visitante dos produtos.</p>
             <ul class="work-tags" aria-label="Entregas do projeto Casa Studart"><li>Site institucional</li><li>Coleção de produtos</li><li>Identidade no digital</li></ul>
+            <button class="work-launch" type="button" data-work-open="casa" aria-expanded="false" aria-controls="work-player" hidden>Explorar aqui <span aria-hidden="true">↗</span></button>
             <a href="https://casastudart.com.br/" target="_blank" rel="noopener noreferrer" aria-label="Visitar o site Casa Studart (abre em nova aba)">Visitar o site <span aria-hidden="true">↗</span></a>
           </article>
           <article class="work-card work-card--francais">
@@ -1211,6 +1226,7 @@
             <h3>Le Cabinet Français</h3>
             <p>O trabalho do professor Valoussière apresentado com clareza: cursos, método, conteúdo cultural e um caminho direto para quem quer aprender francês.</p>
             <ul class="work-tags" aria-label="Entregas do projeto Le Cabinet Français"><li>Apresentação dos cursos</li><li>Conteúdo editorial</li><li>Contato com o professor</li></ul>
+            <button class="work-launch" type="button" data-work-open="francais" aria-expanded="false" aria-controls="work-player" hidden>Explorar aqui <span aria-hidden="true">↗</span></button>
             <a href="https://www.cabinetfrancais.com.br/" target="_blank" rel="noopener noreferrer" aria-label="Visitar o site Le Cabinet Français (abre em nova aba)">Visitar o site <span aria-hidden="true">↗</span></a>
           </article>
         </div>

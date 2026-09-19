@@ -20,6 +20,7 @@ O projeto usa HTML, CSS e JavaScript sem etapa de compilação. As fontes são c
 - `assets/hero-journey.css`: apresentação e adaptação da primeira seção.
 - `assets/hero-journey.js`: animações, navegação das etapas e controles de movimento.
 - `assets/site-motion.js`: entrada discreta dos blocos ao rolar a página, respeitando movimentos reduzidos.
+- `assets/work-player.js`: prévias interativas dos projetos, carregadas apenas ao clicar.
 - `assets/works.css` e `assets/works/`: apresentação e imagens dos trabalhos Casa Studart, Faith Gôndolas e Le Cabinet Français.
 - `GRAVV-KIT-OFICIAL/01-IDENTIDADE/01-LOGO/GRAVV-WORDMARK-WHITE.png`: logotipo utilizado na página.
 - `docs/HERO-01-ANIMACAO-E-LINGUAGEM.md`: conteúdo e comportamento da hero.
