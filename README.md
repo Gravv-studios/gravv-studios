@@ -34,4 +34,4 @@ O `.gitignore` limita o repositório aos arquivos do site. Ao adicionar um novo 
 
 ## Estado da integração
 
-O repositório guarda o código do site. Hospedagem e publicação não são configuradas por esta integração. O formulário de diagnóstico ainda é um protótipo local, sem envio real de mensagens; requer conexão com um serviço antes de uso público.
+O repositório guarda o código do site. A Vercel está conectada ao GitHub e publica em https://gravv-studios.vercel.app/ após os envios para main (integração verificada no painel). O formulário de diagnóstico ainda é um protótipo local, sem envio real de mensagens; requer conexão com um serviço antes de uso público.

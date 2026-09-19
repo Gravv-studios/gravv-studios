@@ -170,3 +170,14 @@
   .hero-scroll-enabled .hero-step-title { font-size: 1.55rem; margin-bottom: 12px; }
   .hero-scroll-enabled .hero-mini { min-height: 110px; gap: 8px; }
 }
+
+@media (max-width: 900px) {
+  .hero-scroll-enabled .hero-mini { padding: 15px; border: 1px solid #45483a; border-radius: 8px; background: #1b1d16; }
+  .hero-scroll-enabled .hero-mini-pointer { right: 12px; bottom: 10px; }
+  .hero-scroll-enabled .hero-mini-action { padding: 11px 12px; }
+}
+@media (max-width: 900px) and (min-height: 701px) {
+  .hero-scroll-enabled .hero-step { min-height: clamp(330px, 43svh, 380px); padding: 22px; }
+  .hero-scroll-enabled .hero-mini { min-height: 180px; }
+  .hero-scroll-enabled .hero-step-title { font-size: clamp(1.85rem, 7vw, 2.4rem); }
+}
