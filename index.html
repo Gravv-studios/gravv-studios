@@ -808,7 +808,7 @@
   <script src="assets/hero-journey.js?v=mobile-scenes-3" defer></script>
   <link rel="stylesheet" href="assets/works.css">
   <script src="assets/site-motion.js?v=2" defer></script>
-  <script src="assets/work-player.js" defer></script>
+  <script src="assets/work-player.js?v=portfolio-2" defer></script>
 </head>
 <body>
 
@@ -944,6 +944,74 @@
     <!-- ==========================================================================
          3. SEÇÃO: DIAGNÓSTICO DO PROBLEMA
          ========================================================================== -->
+    <section class="section-pad" id="trabalhos" aria-labelledby="works-title">
+      <div class="container">
+        <div class="eyebrow-tag">TRABALHOS SELECIONADOS</div>
+        <div class="works-heading">
+          <h2 class="section-headline-large" id="works-title">NOSSO TRABALHO.<br>NA PRÁTICA.</h2>
+          <p class="works-intro">Sites para diferentes negócios. Conheça nossos trabalhos.</p>
+        </div>
+        <section class="work-player" id="work-player" hidden aria-labelledby="work-player-title" aria-describedby="work-player-hint">
+          <div class="work-player-bar">
+            <h2 id="work-player-title">Explore o projeto</h2>
+            <div class="work-player-actions">
+              <a data-player-external target="_blank" rel="noopener noreferrer">Abrir em outra aba ↗</a>
+              <button type="button" data-player-close aria-label="Fechar prévia do projeto">Fechar ×</button>
+            </div>
+          </div>
+          <p class="work-player-hint" id="work-player-hint"></p>
+          <div class="work-player-stage"></div>
+          <p class="work-player-status" data-player-status role="status"></p>
+        </section>
+        <div class="works-grid">
+          <article class="work-card work-card--featured">
+            <figure>
+              <div class="work-image"><img src="assets/works/faith-360.webp" alt="Estúdio 360° da Faith Gôndolas, com estrutura de porta-paletes que pode ser girada e aproximada." width="1265" height="712" loading="lazy" decoding="async"></div>
+              <figcaption class="work-caption">Estúdio 360° do projeto Faith Gôndolas.</figcaption>
+            </figure>
+            <div>
+              <div class="work-meta">EQUIPAMENTOS COMERCIAIS · SITE + 3D</div>
+              <h3>Faith Gôndolas</h3>
+              <p>Um catálogo que dá para explorar: gire os produtos em 3D e veja os detalhes.</p>
+              <button class="work-launch" type="button" data-work-open="faith" aria-expanded="false" aria-controls="work-player" hidden>Mexer no estúdio 3D <span aria-hidden="true">↗</span></button>
+              <a href="https://www.faithgondolas.com.br/secao/porta-paletes.html#estudio-360" target="_blank" rel="noopener noreferrer" aria-label="Explorar o projeto Faith em 3D (abre em nova aba)">Explorar o projeto em 3D <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="work-card work-card--casa">
+            <div class="work-image"><img src="assets/works/casa-studart.webp" alt="Projeto Casa Studart com apresentação da coleção de cachaças em uma composição escura e dourada." width="1200" height="900" loading="lazy" decoding="async"></div>
+            <div class="work-meta">BEBIDAS · VITRINE DIGITAL</div>
+            <h3>Casa Studart</h3>
+            <p>A história da marca e seus produtos em uma vitrine digital.</p>
+            <button class="work-launch" type="button" data-work-open="casa" aria-expanded="false" aria-controls="work-player" hidden>Explorar aqui <span aria-hidden="true">↗</span></button>
+            <a href="https://casastudart.com.br/" target="_blank" rel="noopener noreferrer" aria-label="Visitar o site Casa Studart (abre em nova aba)">Visitar o site <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="work-card work-card--francais">
+            <div class="work-image"><img src="assets/works/le-cabinet-francais.webp" alt="Site Le Cabinet Français, com o professor Valoussière e a apresentação dos cursos de francês." width="1265" height="712" loading="lazy" decoding="async"></div>
+            <div class="work-meta">EDUCAÇÃO · CURSOS DE FRANCÊS</div>
+            <h3>Le Cabinet Français</h3>
+            <p>Cursos de francês e contato com o professor em um só lugar.</p>
+            <button class="work-launch" type="button" data-work-open="francais" aria-expanded="false" aria-controls="work-player" hidden>Explorar aqui <span aria-hidden="true">↗</span></button>
+            <a href="https://www.cabinetfrancais.com.br/" target="_blank" rel="noopener noreferrer" aria-label="Visitar o site Le Cabinet Français (abre em nova aba)">Visitar o site <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="work-card">
+            <div class="work-image"><img src="assets/works/divulga-moveis.webp" alt="Página inicial do projeto Divulga Móveis" width="1265" height="712" loading="lazy" decoding="async"></div>
+            <div class="work-meta">MOBILIÁRIO · CATÁLOGO DIGITAL</div>
+            <h3>Divulga Móveis</h3>
+            <p>Móveis por categoria e seleção de produtos para orçamento.</p>
+            <a href="https://divulga-moveis.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Visitar Divulga Móveis (abre em nova aba)">Visitar o site ↗</a>
+          </article>
+          <article class="work-card">
+            <div class="work-image"><img src="assets/works/aqui-na-rede.webp" alt="Página inicial do projeto Aqui na Rede Pescados" width="1265" height="712" loading="lazy" decoding="async"></div>
+            <div class="work-meta">ALIMENTAÇÃO · CATÁLOGO DE PRODUTOS</div>
+            <h3>Aqui na Rede Pescados</h3>
+            <p>Pescados e combos apresentados para facilitar a escolha.</p>
+            <a href="https://aqui-na-rede-pescados.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Visitar Aqui na Rede Pescados (abre em nova aba)">Visitar o site ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
     <section class="section-pad" id="problema">
       <div class="container">
 
@@ -957,7 +1025,7 @@
           Um site confuso, uma resposta demorada ou uma proposta esquecida podem custar um cliente.
         </p>
 
-        <div class="problem-dual-grid">
+        <div class="problem-dual-grid" style="grid-template-columns: 1fr;">
 
           <div class="problem-card-item danger">
             <div class="eyebrow-tag" style="color: #ff6666;">✕ ONDE VOCÊ PERDE</div>
@@ -978,24 +1046,7 @@
             </ul>
           </div>
 
-          <div class="problem-card-item solution">
-            <div class="eyebrow-tag">✓ COMO A GRAVV AJUDA</div>
-            <h3>O próximo passo fica claro</h3>
-            <ul class="problem-bullet-list">
-              <li>
-                <span class="text-acid" style="font-weight: 700;">✓</span>
-                <span><strong>Site claro.</strong> Seu serviço fica fácil de entender.</span>
-              </li>
-              <li>
-                <span class="text-acid" style="font-weight: 700;">✓</span>
-                <span><strong>Atendimento conectado.</strong> Dúvidas chegam à pessoa certa.</span>
-              </li>
-              <li>
-                <span class="text-acid" style="font-weight: 700;">✓</span>
-                <span><strong>Contatos organizados.</strong> Sua equipe sabe quem precisa de retorno.</span>
-              </li>
-            </ul>
-          </div>
+
 
         </div>
 
@@ -1048,62 +1099,6 @@
     <!-- ==========================================================================
          6. SEÇÃO: TRABALHOS
          ========================================================================== -->
-    <section class="section-pad" id="trabalhos" aria-labelledby="works-title">
-      <div class="container">
-        <div class="eyebrow-tag">TRABALHOS SELECIONADOS</div>
-        <div class="works-heading">
-          <h2 class="section-headline-large" id="works-title">PRESENÇA QUE<br>SAI DO PAPEL.</h2>
-          <p class="works-intro">Veja na prática. Abra os projetos e explore por aqui.</p>
-        </div>
-        <section class="work-player" id="work-player" hidden aria-labelledby="work-player-title" aria-describedby="work-player-hint">
-          <div class="work-player-bar">
-            <h2 id="work-player-title">Explore o projeto</h2>
-            <div class="work-player-actions">
-              <a data-player-external target="_blank" rel="noopener noreferrer">Abrir em outra aba ↗</a>
-              <button type="button" data-player-close aria-label="Fechar prévia do projeto">Fechar ×</button>
-            </div>
-          </div>
-          <p class="work-player-hint" id="work-player-hint"></p>
-          <div class="work-player-stage"></div>
-          <p class="work-player-status" data-player-status role="status"></p>
-        </section>
-        <div class="works-grid">
-          <article class="work-card work-card--featured">
-            <figure>
-              <div class="work-image"><img src="assets/works/faith-360.webp" alt="Estúdio 360° da Faith Gôndolas, com estrutura de porta-paletes que pode ser girada e aproximada." width="1265" height="712" loading="lazy" decoding="async"></div>
-              <figcaption class="work-caption">Estúdio 360° do projeto Faith Gôndolas.</figcaption>
-            </figure>
-            <div>
-              <div class="work-meta">01 / CATÁLOGO + EXPERIÊNCIA 3D</div>
-              <h3>Faith Gôndolas</h3>
-              <p>Um catálogo que dá para explorar: gire os produtos em 3D e veja os detalhes.</p>
-              <ul class="work-tags" aria-label="Entregas do projeto Faith"><li>Site e catálogo</li><li>Visualização 3D</li><li>Navegação por produtos</li></ul>
-              <button class="work-launch" type="button" data-work-open="faith" aria-expanded="false" aria-controls="work-player" hidden>Mexer no estúdio 3D <span aria-hidden="true">↗</span></button>
-              <a href="https://www.faithgondolas.com.br/secao/porta-paletes.html#estudio-360" target="_blank" rel="noopener noreferrer" aria-label="Explorar o projeto Faith em 3D (abre em nova aba)">Explorar o projeto em 3D <span aria-hidden="true">↗</span></a>
-            </div>
-          </article>
-          <article class="work-card work-card--casa">
-            <div class="work-image"><img src="assets/works/casa-studart.webp" alt="Projeto Casa Studart com apresentação da coleção de cachaças em uma composição escura e dourada." width="1200" height="900" loading="lazy" decoding="async"></div>
-            <div class="work-meta">02 / SITE + VITRINE DE PRODUTOS</div>
-            <h3>Casa Studart</h3>
-            <p>A história da marca e seus produtos em uma vitrine digital.</p>
-            <ul class="work-tags" aria-label="Entregas do projeto Casa Studart"><li>Site institucional</li><li>Coleção de produtos</li><li>Identidade no digital</li></ul>
-            <button class="work-launch" type="button" data-work-open="casa" aria-expanded="false" aria-controls="work-player" hidden>Explorar aqui <span aria-hidden="true">↗</span></button>
-            <a href="https://casastudart.com.br/" target="_blank" rel="noopener noreferrer" aria-label="Visitar o site Casa Studart (abre em nova aba)">Visitar o site <span aria-hidden="true">↗</span></a>
-          </article>
-          <article class="work-card work-card--francais">
-            <div class="work-image"><img src="assets/works/le-cabinet-francais.webp" alt="Site Le Cabinet Français, com o professor Valoussière e a apresentação dos cursos de francês." width="1265" height="712" loading="lazy" decoding="async"></div>
-            <div class="work-meta">03 / SITE PARA EDUCAÇÃO</div>
-            <h3>Le Cabinet Français</h3>
-            <p>Cursos de francês e contato com o professor em um só lugar.</p>
-            <ul class="work-tags" aria-label="Entregas do projeto Le Cabinet Français"><li>Apresentação dos cursos</li><li>Conteúdo editorial</li><li>Contato com o professor</li></ul>
-            <button class="work-launch" type="button" data-work-open="francais" aria-expanded="false" aria-controls="work-player" hidden>Explorar aqui <span aria-hidden="true">↗</span></button>
-            <a href="https://www.cabinetfrancais.com.br/" target="_blank" rel="noopener noreferrer" aria-label="Visitar o site Le Cabinet Français (abre em nova aba)">Visitar o site <span aria-hidden="true">↗</span></a>
-          </article>
-        </div>
-      </div>
-    </section>
-
     <!-- Método de execução -->
     <section class="section-pad" id="metodo" style="background: #080808;">
       <div class="container">
@@ -1153,24 +1148,7 @@
     <!-- ==========================================================================
          7. SEÇÃO: MANIFESTO
          ========================================================================== -->
-    <section class="section-pad">
-      <div class="container">
 
-        <div class="eyebrow-tag">NOSSA DIREÇÃO</div>
-
-        <h2 class="manifesto-big-title">
-          NÃO ENTREGAMOS PEÇAS SOLTAS.<br>
-          CONSTRUÍMOS O CAMINHO INTEIRO.
-        </h2>
-
-        <div class="manifesto-energy-bar">
-          <div class="manifesto-dot-pulse"></div>
-          <div class="manifesto-laser-line"></div>
-          <div class="manifesto-target-node"></div>
-        </div>
-
-      </div>
-    </section>
 
     <!-- ==========================================================================
          8. SEÇÃO: FAQ

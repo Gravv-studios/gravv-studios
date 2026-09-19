@@ -2,7 +2,7 @@
 
 Projetos indicados pelo usuário em 19/09/2026: Casa Studart, Faith Gôndolas (com destaque ao 3D) e o site do professor de francês, Le Cabinet Français.
 
-A seção `#trabalhos` vem depois dos serviços. A estrutura e a copy aprovadas da hero foram preservadas. O menu recebeu o acesso “Trabalhos”.
+A seção `#trabalhos` vem logo depois da hero. A estrutura e a copy aprovadas da hero foram preservadas. O menu recebeu o acesso “Trabalhos”.
 
 ## Imagens e destinos
 
@@ -21,3 +21,11 @@ Os blocos entram suavemente ao chegar à tela, uma única vez. As imagens dos tr
 O portfólio descreve entregas e recursos verificáveis. Não apresenta métricas de venda, depoimentos ou resultados não fornecidos.
 
 As imagens exibidas usam versões WebP otimizadas: aproximadamente 178 KB somadas, frente a 893 KB dos PNGs originais, mantidos como fonte.
+
+## Ampliação do portfólio
+
+Divulga Móveis (mobiliário) e Aqui na Rede Pescados (alimentação) foram incluídos com capturas reais das páginas públicas da Vercel, convertidas para WebP. Os cartões abrem os sites em outra aba; a incorporação não carregou no teste local. Os três projetos anteriores mantêm suas prévias interativas.
+
+Doctor & Cia, de roupas médicas, permanece pendente: o site público informa que é prévia de teste e contém nomes de produtos a confirmar. Incluir após conclusão e confirmação do projeto indicado pelo usuário. Não foi apresentado como trabalho finalizado nem feita alteração nos repositórios dos clientes nesta revisão.
+
+A copy dos cartões foi reduzida a setor, nome e uma frase. A seção de problemas perdeu o bloco de soluções repetidas e o manifesto duplicado foi removido.
