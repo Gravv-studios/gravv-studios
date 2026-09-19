@@ -1,0 +1,32 @@
+# Somente os arquivos do site entram neste repositório.
+/*
+!/.gitignore
+!/.gitattributes
+!/AGENTS.md
+!/README.md
+!/index.html
+!/assets/
+/assets/*
+!/assets/hero-journey.css
+!/assets/hero-journey.js
+!/docs/
+/docs/*
+!/docs/HERO-01-ANIMACAO-E-LINGUAGEM.md
+!/GRAVV-KIT-OFICIAL/
+/GRAVV-KIT-OFICIAL/*
+!/GRAVV-KIT-OFICIAL/01-IDENTIDADE/
+/GRAVV-KIT-OFICIAL/01-IDENTIDADE/*
+!/GRAVV-KIT-OFICIAL/01-IDENTIDADE/01-LOGO/
+/GRAVV-KIT-OFICIAL/01-IDENTIDADE/01-LOGO/*
+!/GRAVV-KIT-OFICIAL/01-IDENTIDADE/01-LOGO/GRAVV-WORDMARK-WHITE.png
+
+# Não versionar credenciais nem arquivos temporários, mesmo em pastas liberadas.
+**/.env
+**/.env.*
+**/*.pem
+**/*.key
+**/node_modules/
+**/__pycache__/
+**/*.log
+**/.DS_Store
+**/Thumbs.db

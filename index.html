@@ -1,0 +1,1489 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GRAVV | Presença com peso.</title>
+  <meta name="description" content="Estrutura digital integrada: Sites de alta conversão, Tráfego Pago, Agentes de IA e CRM em um único sistema com peso.">
+  <meta name="theme-color" content="#050505">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="GRAVV | Presença com peso.">
+  <meta property="og:description" content="Sites, CRM, IA e Tráfego. Um sistema com direção.">
+  <meta property="og:url" content="https://gravv.studio">
+
+  <!-- Favicon Oficial -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 640'%3E%3Cg fill='%23D7FF00' transform='translate(0 40)'%3E%3Cpath d='M40 40h150l220 480H260z'/%3E%3Cpath d='M500 40h150L370 520H220z'/%3E%3Cpath d='M710 40h150L580 520H430z'/%3E%3C/g%3E%3C/svg%3E">
+
+  <!-- Fontes Oficiais -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@500;600;700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       TOKENS & SISTEMA VISUAL GRAVV
+       ========================================================================== */
+    :root {
+      --bg-black: #050505;
+      --bg-surface: #0a0a0a;
+      --bg-card: #0f0f0f;
+      --bg-card-hover: #161616;
+      --bg-input: #0e0e0e;
+
+      --text-white: #ECE9E1;
+      --text-gray: #B0AEA8;
+      --text-muted: #787670;
+      --text-dark: #050505;
+
+      --acid: #D7FF00;
+      --acid-hover: #e5ff33;
+      --acid-glow: rgba(215, 255, 0, 0.4);
+      --acid-glow-soft: rgba(215, 255, 0, 0.15);
+
+      --line: #222222;
+      --line-bright: rgba(236, 233, 225, 0.2);
+
+      --font-display: "Archivo Black", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-sans: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: "IBM Plex Mono", monospace;
+
+      --container: 1400px;
+      --header-h: 90px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-black);
+      color: var(--text-white);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--bg-black);
+      color: var(--text-white);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* LUZ VERDE DINÂMICA DE SCROLL (Spotlight que segue o scroll) */
+    .scroll-ambient-glow {
+      position: fixed;
+      left: 50%;
+      top: 0;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(215, 255, 0, 0.12) 0%, rgba(215, 255, 0, 0.03) 40%, transparent 70%);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 1;
+      filter: blur(40px);
+      transition: top 80ms ease-out, left 80ms ease-out, opacity 300ms ease;
+      opacity: 0.85;
+    }
+
+    /* Trilho vertical iluminado à esquerda */
+    .scroll-laser-track {
+      position: fixed;
+      left: clamp(0.75rem, 2vw, 2rem);
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(236, 233, 225, 0.06);
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    .scroll-laser-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(180deg, var(--acid) 0%, #a6cc00 100%);
+      box-shadow: 0 0 12px var(--acid), 0 0 24px var(--acid);
+      transition: height 50ms linear;
+    }
+
+    .scroll-laser-head {
+      position: absolute;
+      bottom: -6px;
+      left: -5px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--acid);
+      box-shadow: 0 0 16px var(--acid), 0 0 30px var(--acid);
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 4.5vw, 4.5rem);
+      position: relative;
+      z-index: 5;
+    }
+
+    .font-mono { font-family: var(--font-mono); }
+    .font-display { font-family: var(--font-display); }
+    .text-acid { color: var(--acid); }
+    .text-gray { color: var(--text-gray); }
+
+    .eyebrow-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--acid);
+      margin-bottom: 1.25rem;
+    }
+    .eyebrow-tag::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: var(--acid);
+      box-shadow: 0 0 8px var(--acid);
+      display: inline-block;
+    }
+
+    /* Botão Principal Grande e Visível */
+    .btn-acid {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem;
+      background-color: var(--acid);
+      color: var(--text-dark);
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      padding: 1.25rem 2.6rem;
+      border: none;
+      border-radius: 2px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 200ms var(--ease);
+      white-space: nowrap;
+      box-shadow: 0 0 20px rgba(215, 255, 0, 0.2);
+    }
+    .btn-acid:hover {
+      background-color: var(--acid-hover);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 10px 30px rgba(215, 255, 0, 0.4);
+    }
+    .btn-acid:active { transform: scale(0.98); }
+
+    .btn-outline-header {
+      background: transparent;
+      border: 1.5px solid var(--line-bright);
+      color: var(--text-white);
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.75rem 1.6rem;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 180ms ease;
+    }
+    .btn-outline-header:hover {
+      border-color: var(--acid);
+      color: var(--acid);
+      background: rgba(215, 255, 0, 0.08);
+      box-shadow: 0 0 14px rgba(215, 255, 0, 0.2);
+    }
+
+    .section-pad {
+      padding: clamp(5rem, 8vw, 8.5rem) 0;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+
+    /* ==========================================================================
+       HEADER
+       ========================================================================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: var(--header-h);
+      background: rgba(5, 5, 5, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--line);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .header-logo-img {
+      height: 34px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 0 10px rgba(236, 233, 225, 0.2));
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      list-style: none;
+    }
+
+    .header-nav a {
+      font-family: var(--font-mono);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-white);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      transition: color 180ms ease;
+    }
+    .header-nav a:hover { color: var(--acid); }
+
+    /* ==========================================================================
+       SEÇÃO: DIAGNÓSTICO DO PROBLEMA
+       ========================================================================== */
+    .section-headline-large {
+      font-family: var(--font-display);
+      font-size: clamp(2.3rem, 4.8vw, 3.8rem);
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      color: var(--text-white);
+      margin-bottom: 1.75rem;
+    }
+
+    .problem-dual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .problem-card-item {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--line);
+      padding: clamp(2rem, 4vw, 3.2rem);
+      position: relative;
+    }
+
+    .problem-card-item.danger {
+      border-top: 4px solid #ff4444;
+    }
+
+    .problem-card-item.solution {
+      border-top: 4px solid var(--acid);
+      background: #0a0d03;
+    }
+
+    .problem-card-item h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      line-height: 1.15;
+    }
+
+    .problem-card-item p {
+      font-size: 1.05rem;
+      color: var(--text-gray);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .problem-bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .problem-bullet-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      font-size: 1rem;
+      line-height: 1.45;
+      color: var(--text-gray);
+    }
+
+    .problem-bullet-list li strong { color: var(--text-white); }
+
+    /* ==========================================================================
+       SEÇÃO: O FLUXO OPERACIONAL
+       ========================================================================== */
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .pipeline-col {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--line);
+      padding: 2.2rem 1.6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 320px;
+      transition: all 220ms ease;
+    }
+
+    .pipeline-col:hover {
+      border-color: var(--acid);
+      background: var(--bg-card-hover);
+      transform: translateY(-4px);
+    }
+
+    .pipeline-num-tag {
+      font-family: var(--font-mono);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--acid);
+      margin-bottom: 1.2rem;
+    }
+
+    .pipeline-h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.85rem;
+      color: var(--text-white);
+      line-height: 1.15;
+    }
+
+    .pipeline-text {
+      font-size: 0.95rem;
+      color: var(--text-gray);
+      line-height: 1.6;
+    }
+
+    .pipeline-action-verb {
+      margin-top: 1.5rem;
+      padding-top: 0.85rem;
+      border-top: 1px dashed var(--line);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--acid);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ==========================================================================
+       SEÇÃO: OS 4 PILARES
+       ========================================================================== */
+    .pillars-dual-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .pillar-box {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--line);
+      padding: clamp(2.2rem, 4vw, 3.2rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: all 220ms ease;
+    }
+
+    .pillar-box:hover {
+      border-color: var(--acid);
+    }
+
+    .pillar-box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 45px;
+      height: 3px;
+      background: var(--acid);
+      box-shadow: 0 0 10px var(--acid);
+    }
+
+    .pillar-badge-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1.5rem;
+    }
+
+    .pillar-badge-num {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--acid);
+      letter-spacing: 0.08em;
+    }
+
+    .pillar-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2.4vw, 2rem);
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+
+    .pillar-problem-quote {
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      border-left: 2px solid var(--line);
+      padding-left: 0.85rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.45;
+    }
+
+    .pillar-body-text {
+      color: var(--text-gray);
+      font-size: 1.05rem;
+      line-height: 1.65;
+      margin-bottom: 2rem;
+    }
+
+    .pillar-features-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      border-top: 1px solid var(--line);
+      padding-top: 1.75rem;
+    }
+
+    .pillar-features-list li {
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-white);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .pillar-features-list li::before {
+      content: "■";
+      color: var(--acid);
+      font-size: 0.7rem;
+    }
+
+    /* ==========================================================================
+       SEÇÃO: MÉTODO
+       ========================================================================== */
+    .method-cards-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.75rem;
+      margin-top: 3.5rem;
+    }
+
+    .method-step-box {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--line);
+      padding: 2.2rem 1.75rem;
+      position: relative;
+    }
+
+    .method-step-box.active {
+      border-top: 4px solid var(--acid);
+      box-shadow: 0 0 20px rgba(215, 255, 0, 0.1);
+    }
+
+    .method-step-number {
+      font-family: var(--font-mono);
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      line-height: 1;
+    }
+    .method-step-box.active .method-step-number { color: var(--acid); }
+
+    .method-step-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.85rem;
+      color: var(--text-white);
+    }
+
+    .method-step-desc {
+      font-size: 0.95rem;
+      color: var(--text-gray);
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       SEÇÃO: MANIFESTO
+       ========================================================================== */
+    .manifesto-big-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5.2vw, 4.6rem);
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      color: var(--text-white);
+      margin-bottom: 2.5rem;
+      max-width: 22ch;
+    }
+
+    .manifesto-energy-bar {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+    .manifesto-dot-pulse {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--acid);
+      box-shadow: 0 0 14px var(--acid);
+    }
+    .manifesto-laser-line {
+      flex: 1;
+      height: 3px;
+      background: linear-gradient(90deg, var(--acid) 0%, #a6cc00 100%);
+      box-shadow: 0 0 12px var(--acid);
+    }
+    .manifesto-target-node {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2.5px solid var(--acid);
+      background: var(--bg-black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 16px var(--acid);
+    }
+    .manifesto-target-node::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--acid);
+    }
+
+    /* ==========================================================================
+       SEÇÃO: FAQ
+       ========================================================================== */
+    .faq-wrapper {
+      max-width: 980px;
+      margin-top: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--line);
+      border: 1.5px solid var(--line);
+    }
+
+    .faq-row { background: var(--bg-surface); }
+
+    .faq-btn {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      padding: 1.8rem clamp(1.5rem, 3vw, 2.5rem);
+      color: var(--text-white);
+      font-family: var(--font-sans);
+      font-size: 1.25rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      transition: background-color 180ms ease;
+    }
+    .faq-btn:hover { background-color: var(--bg-card-hover); }
+
+    .faq-symbol {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      color: var(--acid);
+      transition: transform 220ms ease;
+      flex-shrink: 0;
+    }
+    .faq-btn[aria-expanded="true"] .faq-symbol { transform: rotate(45deg); }
+
+    .faq-answer {
+      display: none;
+      padding: 0 clamp(1.5rem, 3vw, 2.5rem) 1.8rem clamp(1.5rem, 3vw, 2.5rem);
+      color: var(--text-gray);
+      font-size: 1.05rem;
+      line-height: 1.65;
+    }
+    .faq-answer.open { display: block; }
+
+    /* ==========================================================================
+       SEÇÃO: CTA FINAL & FORMULÁRIO
+       ========================================================================== */
+    .final-cta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: clamp(2.5rem, 6vw, 5rem);
+      align-items: start;
+    }
+
+    .final-cta-big-h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 5.5vw, 4.6rem);
+      line-height: 0.92;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      color: var(--text-white);
+      margin-bottom: 1.75rem;
+    }
+
+    .final-cta-subtext {
+      font-size: 1.15rem;
+      color: var(--text-gray);
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+    }
+
+    .company-info-block {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--line);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+    }
+
+    .form-brutalist-card {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--line);
+      padding: clamp(2rem, 4vw, 3.5rem);
+      position: relative;
+    }
+    .form-brutalist-card::before {
+      content: "[ DIAGNÓSTICO ESTRATÉGICO ]";
+      position: absolute;
+      top: -14px;
+      right: 24px;
+      background: var(--bg-black);
+      padding: 0 12px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--acid);
+      letter-spacing: 0.1em;
+    }
+
+    .form-fields-flex {
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+    }
+
+    .form-group-item label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-gray);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-input-element {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1.5px solid var(--line);
+      color: var(--text-white);
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      padding: 1.1rem 1.25rem;
+      border-radius: 2px;
+      transition: all 180ms ease;
+    }
+
+    .form-input-element:focus {
+      outline: none;
+      border-color: var(--acid);
+      background: #141414;
+      box-shadow: 0 0 14px rgba(215, 255, 0, 0.2);
+    }
+
+    .form-select-element {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23D7FF00' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1.4rem center;
+      cursor: pointer;
+    }
+
+    /* FOOTER */
+    .site-footer {
+      padding: 3.5rem 0;
+      background: #020202;
+    }
+    .footer-inner-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .footer-divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+      margin: 0 3rem;
+      display: none;
+    }
+    @media (min-width: 768px) { .footer-divider-line { display: block; } }
+
+    .footer-meta-tags {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-white);
+    }
+    .footer-meta-tags a { color: var(--text-white); text-decoration: none; }
+    .footer-meta-tags a:hover { color: var(--acid); }
+
+    /* ==========================================================================
+       RESPONSIVIDADE
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .problem-dual-grid { grid-template-columns: 1fr; }
+      .pipeline-grid { grid-template-columns: repeat(2, 1fr); }
+      .pillars-dual-grid { grid-template-columns: 1fr; }
+      .method-cards-row { grid-template-columns: repeat(2, 1fr); }
+      .final-cta-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .header-nav { display: none; }
+      .pipeline-grid { grid-template-columns: 1fr; }
+      .method-cards-row { grid-template-columns: 1fr; }
+      .footer-inner-flex { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/hero-journey.css">
+  <script src="assets/hero-journey.js" defer></script>
+</head>
+<body>
+
+  <!-- Luz Verde Dinâmica que Acompanha o Scroll -->
+  <div class="scroll-ambient-glow" id="scroll-glow" aria-hidden="true"></div>
+
+  <!-- Trilho Lateral com Laser Verde de Scroll -->
+  <div class="scroll-laser-track" aria-hidden="true">
+    <div class="scroll-laser-progress" id="laser-progress">
+      <div class="scroll-laser-head"></div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       1. CABEÇALHO
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+
+      <a href="#" aria-label="GRAVV — Início">
+        <img src="GRAVV-KIT-OFICIAL/01-IDENTIDADE/01-LOGO/GRAVV-WORDMARK-WHITE.png" alt="GRAVV" class="header-logo-img">
+      </a>
+
+      <nav aria-label="Navegação Principal">
+        <ul class="header-nav">
+          <li><a href="#problema">O Sistema</a></li>
+          <li><a href="#jornada">Fluxo</a></li>
+          <li><a href="#pilares">Pilares</a></li>
+          <li><a href="#metodo">Método</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div>
+        <a href="#contato" class="btn-outline-header">DIAGNÓSTICO</a>
+      </div>
+
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ==========================================================================
+         2. HERO SECTION — ANIMAÇÃO + CARDS AMPLOS
+         ========================================================================== -->
+    <section class="hero-section" id="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-text-col">
+            <h1 class="hero-h1" id="hero-title">PRESENÇA<br>COM PESO<span class="acid-dot">.</span></h1>
+            <p class="hero-pain">Seu próximo cliente pode estar indo embora antes de falar com você.</p>
+            <p class="hero-desc">Anúncio que não explica. Site que confunde. Mensagem sem resposta. A GRAVV conecta seus anúncios, seu site e seu atendimento para que o interesse tenha um próximo passo.</p>
+            <a href="#contato" class="btn-acid">
+              QUERO DESCOBRIR ONDE PERCO CLIENTES
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <p class="hero-cta-note">Vamos olhar o caminho do seu cliente, do anúncio ao retorno.</p>
+            <div class="hero-location-bar">Brasília, DF · Atendimento em todo o Brasil</div>
+          </div>
+
+          <div class="hero-story" data-hero-story data-playing="false" role="region" aria-labelledby="hero-story-title">
+            <div class="hero-story-intro">
+              <h2 id="hero-story-title">Veja o caminho de quem pode comprar de você.</h2>
+              <span class="hero-story-example">Exemplo ilustrativo</span>
+            </div>
+            <div class="hero-story-map">
+              <span class="hero-traveler" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="7" r="3.5"/><path d="M5 21v-3a7 7 0 0 1 14 0v3"/></svg></span>
+              <svg class="hero-route" aria-hidden="true">
+                <path/><path class="hero-route-lit" pathLength="1"/>
+                <path/><path class="hero-route-lit" pathLength="1"/>
+                <path/><path class="hero-route-lit" pathLength="1"/>
+              </svg>
+              <ol class="hero-story-steps">
+                <li>
+                  <button class="hero-step" type="button" data-hero-step="0" aria-pressed="true" aria-controls="hero-story-caption">
+                    <span class="hero-step-label"><span>Anúncio</span><span class="hero-step-number">01</span></span>
+                    <span class="hero-step-title">Encontra sua empresa</span>
+                    <span class="hero-mini hero-mini-ad" aria-hidden="true">
+                      <span class="hero-mini-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></svg>Estou procurando…</span>
+                      <strong>O serviço que você precisa.</strong>
+                      <span class="hero-mini-action">Quero conhecer →</span>
+                      <svg class="hero-mini-pointer" viewBox="0 0 24 28" fill="currentColor" stroke="#050505" stroke-width="1.5"><path d="M3 2 21 16 12 17 8 25Z"/></svg>
+                    </span>
+                  </button>
+                </li>
+                <li>
+                  <button class="hero-step" type="button" data-hero-step="1" aria-pressed="false" aria-controls="hero-story-caption">
+                    <span class="hero-step-label"><span>Site</span><span class="hero-step-number">02</span></span>
+                    <span class="hero-step-title">Entende o que você faz</span>
+                    <span class="hero-mini hero-mini-site" aria-hidden="true">
+                      <span class="hero-mini-top">● ● ● &nbsp; Sua empresa</span>
+                      <strong>Entenda como podemos ajudar.</strong>
+                      <span class="hero-mini-action">Quero conversar →</span>
+                      <svg class="hero-mini-pointer" viewBox="0 0 24 28" fill="currentColor" stroke="#050505" stroke-width="1.5"><path d="M3 2 21 16 12 17 8 25Z"/></svg>
+                    </span>
+                  </button>
+                </li>
+                <li>
+                  <button class="hero-step" type="button" data-hero-step="2" aria-pressed="false" aria-controls="hero-story-caption">
+                    <span class="hero-step-label"><span>Atendimento</span><span class="hero-step-number">03</span></span>
+                    <span class="hero-step-title">Tira suas dúvidas</span>
+                    <span class="hero-mini hero-mini-chat" aria-hidden="true">
+                      <span class="hero-mini-bubble">Como funciona?</span>
+                      <span class="hero-mini-bubble hero-mini-reply">Vamos te ajudar. Do que você precisa?</span>
+                    </span>
+                  </button>
+                </li>
+                <li>
+                  <button class="hero-step" type="button" data-hero-step="3" aria-pressed="false" aria-controls="hero-story-caption">
+                    <span class="hero-step-label"><span>Acompanhamento</span><span class="hero-step-number">04</span></span>
+                    <span class="hero-step-title">Recebe um retorno</span>
+                    <span class="hero-mini hero-mini-list" aria-hidden="true">
+                      <span class="hero-mini-task"><i>✓</i>Contato salvo</span>
+                      <span class="hero-mini-task"><i>✓</i>Conversa anotada</span>
+                      <span class="hero-mini-task"><i>✓</i>Lembrete de retorno</span>
+                    </span>
+                  </button>
+                </li>
+              </ol>
+            </div>
+            <div class="hero-story-caption" id="hero-story-caption" data-hero-caption aria-live="polite" aria-atomic="true">
+              <div class="hero-caption-kicker"><span class="hero-person" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="7" r="3.5"/><path d="M5 21v-3a7 7 0 0 1 14 0v3"/></svg></span><span data-hero-caption-step>A MESMA PESSOA · ETAPA 1</span></div>
+              <h3>Ela encontra sua empresa.</h3>
+              <p data-hero-description>Um anúncio apresenta o que você faz a alguém que pode precisar do seu serviço.</p>
+              <p class="hero-story-risk"><strong>Onde você pode perder:</strong> <span data-hero-risk>Se a mensagem não é clara, ela passa direto.</span></p>
+            </div>
+            <div class="hero-story-controls" hidden>
+              <button class="hero-play" data-hero-play type="button" aria-label="Ver o caminho completo"><span class="hero-play-icon" aria-hidden="true">▶</span><span data-hero-play-label>Ver o caminho</span></button>
+              <button data-hero-previous type="button" aria-label="Etapa anterior" disabled>←</button>
+              <span class="hero-step-counter" data-hero-counter>1 de 4</span>
+              <button data-hero-next type="button" aria-label="Próxima etapa">→</button>
+            </div>
+            <div data-hero-progress aria-hidden="true"></div>
+            <p class="hero-story-hint">Anúncio → Site → Atendimento → Acompanhamento.</p>
+            <div class="hero-motion-choice" data-hero-motion-choice hidden><span>Seu navegador prefere movimentos reduzidos.</span><button type="button" data-hero-motion>Ativar animação completa</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         3. SEÇÃO: DIAGNÓSTICO DO PROBLEMA
+         ========================================================================== -->
+    <section class="section-pad" id="problema">
+      <div class="container">
+
+        <div class="eyebrow-tag">01 // O DIAGNÓSTICO</div>
+        <h2 class="section-headline-large">
+          FERRAMENTAS ISOLADAS SÓ<br>
+          ORGANIZAM O DESPERDÍCIO.
+        </h2>
+
+        <p style="color: var(--text-gray); font-size: 1.25rem; max-width: 820px; line-height: 1.6;">
+          Contratar o desenvolvedor do site, uma agência para os anúncios e tentar rodar o atendimento manual cria buracos na sua operação onde ninguém se responsabiliza pelas vendas.
+        </p>
+
+        <div class="problem-dual-grid">
+
+          <div class="problem-card-item danger">
+            <div class="eyebrow-tag" style="color: #ff6666;">✕ O MODELO FRAGMENTADO TRADICIONAL</div>
+            <h3>O Custo de Peças Desconectadas</h3>
+            <p>Seus investimentos perdem força porque as etapas não conversam entre si:</p>
+            <ul class="problem-bullet-list">
+              <li>
+                <span style="color: #ff5555; font-weight: 700;">✕</span>
+                <span><strong>Tráfego que queima dinheiro:</strong> Anúncios trazem cliques para páginas lentas que não convertem.</span>
+              </li>
+              <li>
+                <span style="color: #ff5555; font-weight: 700;">✕</span>
+                <span><strong>Atendimento demorado:</strong> O cliente chama no WhatsApp à noite ou no almoço e espera horas por retorno.</span>
+              </li>
+              <li>
+                <span style="color: #ff5555; font-weight: 700;">✕</span>
+                <span><strong>Vendas sem controle:</strong> Contatos ficam perdidos nos celulares e ninguém alimenta o CRM.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="problem-card-item solution">
+            <div class="eyebrow-tag">✓ A ESTRUTURA GRAVV UNIFICADA</div>
+            <h3>Uma Única Esteira com Peso</h3>
+            <p>Construímos a esteira completa para transformar cliques em clientes no seu CRM:</p>
+            <ul class="problem-bullet-list">
+              <li>
+                <span class="text-acid" style="font-weight: 700;">✓</span>
+                <span><strong>Páginas ultrarrápidas (< 0.8s):</strong> Sites autorais projetados para ancorar autoridade e gerar ação.</span>
+              </li>
+              <li>
+                <span class="text-acid" style="font-weight: 700;">✓</span>
+                <span><strong>Atendimento em 5 segundos:</strong> Agente de IA humanizado no WhatsApp que responde 24/7 e tria o lead.</span>
+              </li>
+              <li>
+                <span class="text-acid" style="font-weight: 700;">✓</span>
+                <span><strong>Pipeline organizado:</strong> Oportunidades registradas em tempo real com histórico para o time comercial.</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         4. SEÇÃO: DO PRIMEIRO CLIQUE À PRÓXIMA AÇÃO
+         ========================================================================== -->
+    <section class="section-pad" id="jornada" style="background: #080808;">
+      <div class="container">
+
+        <div class="eyebrow-tag">02 // O FLUXO OPERACIONAL</div>
+        <h2 class="section-headline-large">
+          DO PRIMEIRO CLIQUE<br>
+          À PRÓXIMA AÇÃO.
+        </h2>
+
+        <p style="color: var(--text-gray); font-size: 1.2rem; max-width: 780px; line-height: 1.6;">
+          Cada etapa cumpre um papel cirúrgico no caminho de compra do seu cliente:
+        </p>
+
+        <div class="pipeline-grid">
+
+          <div class="pipeline-col">
+            <div>
+              <div class="pipeline-num-tag">01. TRÁFEGO</div>
+              <h3 class="pipeline-h3">ATRAIR COM PRECISÃO</h3>
+              <p class="pipeline-text">
+                Campanhas no Meta Ads e Google Ads calibradas para alcançar tomadores de decisão com demanda e verba.
+              </p>
+            </div>
+            <div class="pipeline-action-verb">→ CONDUZ AO SITE</div>
+          </div>
+
+          <div class="pipeline-col">
+            <div>
+              <div class="pipeline-num-tag">02. SITE</div>
+              <h3 class="pipeline-h3">CONDUZIR À DECISÃO</h3>
+              <p class="pipeline-text">
+                Páginas autorais com autoridade visual, copy persuasiva e caminhos claros para o visitante iniciar o contato.
+              </p>
+            </div>
+            <div class="pipeline-action-verb">→ ACIONA ATENDIMENTO</div>
+          </div>
+
+          <div class="pipeline-col">
+            <div>
+              <div class="pipeline-num-tag">03. IA</div>
+              <h3 class="pipeline-h3">CONVERSAR & QUALIFICAR</h3>
+              <p class="pipeline-text">
+                Agente de IA no WhatsApp responde em 5 segundos, tira dúvidas aprovadas e tria o orçamento antes do vendedor.
+              </p>
+            </div>
+            <div class="pipeline-action-verb">→ REGISTRA NO PIPELINE</div>
+          </div>
+
+          <div class="pipeline-col">
+            <div>
+              <div class="pipeline-num-tag">04. CRM</div>
+              <h3 class="pipeline-h3">ACOMPANHAR & FECHAR</h3>
+              <p class="pipeline-text">
+                CRM sincronizado com histórico, lembretes automáticos e dados reais de ROI para orientar investimentos.
+              </p>
+            </div>
+            <div class="pipeline-action-verb text-acid">↺ REALIMENTA O TRÁFEGO</div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         5. SEÇÃO: OS 4 PILARES EM DETALHE
+         ========================================================================== -->
+    <section class="section-pad" id="pilares">
+      <div class="container">
+
+        <div class="eyebrow-tag">03 // ESCOPO DE ENTREGA</div>
+        <h2 class="section-headline-large">OS QUATRO PILARES DO SISTEMA.</h2>
+
+        <div class="pillars-dual-grid">
+
+          <div class="pillar-box">
+            <div>
+              <div class="pillar-badge-top">
+                <span class="pillar-badge-num">[ PILAR 01 ]</span>
+                <span class="font-mono text-muted">PRESENÇA & DECISÃO</span>
+              </div>
+              <h3 class="pillar-title">Websites & Portais de Alta Conversão</h3>
+              <div class="pillar-problem-quote">Resolve: Sites lentos, genéricos e sem autoridade que perdem visitantes.</div>
+              <p class="pillar-body-text">
+                Desenvolvemos páginas autorais com design industrial sofisticado, tempo de resposta abaixo de 0.8s e copy focada em decisão. Sem templates prontos e sem código inútil.
+              </p>
+            </div>
+            <ul class="pillar-features-list">
+              <li>Design autoral exclusivo alinhado ao seu posicionamento</li>
+              <li>Arquitetura orientada à conversão e tempo de resposta instantâneo</li>
+              <li>100% responsivo para celulares e telas de alta resolução</li>
+              <li>SEO técnico, semântica e metatags estruturadas</li>
+            </ul>
+          </div>
+
+          <div class="pillar-box">
+            <div>
+              <div class="pillar-badge-top">
+                <span class="pillar-badge-num">[ PILAR 02 ]</span>
+                <span class="font-mono text-muted">AQUISIÇÃO DIRECIONADA</span>
+              </div>
+              <h3 class="pillar-title">Tráfego Pago & Mídia de Performance</h3>
+              <div class="pillar-problem-quote">Resolve: Dinheiro investido em anúncios sem saber quais geram retorno real.</div>
+              <p class="pillar-body-text">
+                Gestão de mídia no Meta Ads e Google Ads conectada diretamente às ofertas e páginas. Criamos os anúncios e acompanhamos o custo por oportunidade real, não apenas cliques vazios.
+              </p>
+            </div>
+            <ul class="pillar-features-list">
+              <li>Campanhas focadas em intenção de compra e geração de leads</li>
+              <li>Direção de criativos estáticos e vídeos para teste contínuo</li>
+              <li>Tagueamento avançado (Pixel, CAPI, UTMs no CRM)</li>
+              <li>Otimização contínua com base em receita e faturamento</li>
+            </ul>
+          </div>
+
+          <div class="pillar-box">
+            <div>
+              <div class="pillar-badge-top">
+                <span class="pillar-badge-num">[ PILAR 03 ]</span>
+                <span class="font-mono text-muted">ATENDIMENTO 24/7</span>
+              </div>
+              <h3 class="pillar-title">Agentes de IA Contextuais no WhatsApp</h3>
+              <div class="pillar-problem-quote">Resolve: Demora de horas para responder e perda de clientes à noite.</div>
+              <p class="pillar-body-text">
+                Implantamos inteligência artificial treinada exclusivamente nas regras da sua empresa. Atende em segundos, tira dúvidas aprovadas, qualifica o perfil e transfere para humanos.
+              </p>
+            </div>
+            <ul class="pillar-features-list">
+              <li>Linguagem natural calibrada para o tom de voz da marca</li>
+              <li>Base de conhecimento segura baseada em documentos oficiais</li>
+              <li>Qualificação inteligente de orçamento antes do transbordo</li>
+              <li>Zero risco de respostas inventadas ou fora de escopo</li>
+            </ul>
+          </div>
+
+          <div class="pillar-box">
+            <div>
+              <div class="pillar-badge-top">
+                <span class="pillar-badge-num">[ PILAR 04 ]</span>
+                <span class="font-mono text-muted">OPERAÇÃO COMERCIAL</span>
+              </div>
+              <h3 class="pillar-title">CRM & Automação de Vendas</h3>
+              <div class="pillar-problem-quote">Resolve: Contatos soltos no WhatsApp e vendedores sem rotina de retorno.</div>
+              <p class="pillar-body-text">
+                Organizamos o fluxo comercial da sua empresa em um CRM conectado ao WhatsApp. Cada contato é etiquetado, movido pelas etapas de venda e recebe lembretes automáticos.
+              </p>
+            </div>
+            <ul class="pillar-features-list">
+              <li>Pipeline customizado para o ciclo de vendas do seu negócio</li>
+              <li>Automação de follow-ups inteligentes e lembretes para vendedores</li>
+              <li>Histórico completo de conversas centralizado</li>
+              <li>Relatórios claros de taxa de conversão por etapa do funil</li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         6. SEÇÃO: MÉTODO
+         ========================================================================== -->
+    <section class="section-pad" id="metodo" style="background: #080808;">
+      <div class="container">
+
+        <div class="eyebrow-tag">04 // MÉTODO DE EXECUÇÃO</div>
+        <h2 class="section-headline-large">QUATRO ETAPAS. ZERO IMPROVISO.</h2>
+
+        <div class="method-cards-row">
+
+          <div class="method-step-box active">
+            <div class="method-step-number">01</div>
+            <h3 class="method-step-title">Diagnóstico</h3>
+            <p class="method-step-desc">
+              Mapeamos seu posicionamento, gargalos de atendimento, canais de aquisição e ferramentas atuais para desenhar a esteira ideal.
+            </p>
+          </div>
+
+          <div class="method-step-box">
+            <div class="method-step-number">02</div>
+            <h3 class="method-step-title">Arquitetura</h3>
+            <p class="method-step-desc">
+              Desenvolvemos a copy persuasiva, wireframes autorais, regras de negócio dos agentes de IA e o fluxo de etapas do CRM.
+            </p>
+          </div>
+
+          <div class="method-step-box">
+            <div class="method-step-number">03</div>
+            <h3 class="method-step-title">Construção</h3>
+            <p class="method-step-desc">
+              Programação do site ultrarrápido, calibração das APIs dos agentes de IA, configuração do CRM e tagueamento de mídia.
+            </p>
+          </div>
+
+          <div class="method-step-box">
+            <div class="method-step-number">04</div>
+            <h3 class="method-step-title">Ativação</h3>
+            <p class="method-step-desc">
+              Lançamento oficial da esteira com tráfego ativo, monitoramento de conversão em tempo real e refinamento contínuo.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         7. SEÇÃO: MANIFESTO
+         ========================================================================== -->
+    <section class="section-pad">
+      <div class="container">
+
+        <div class="eyebrow-tag">05 // NOSSA DIREÇÃO</div>
+
+        <h2 class="manifesto-big-title">
+          NÃO ENTREGAMOS PEÇAS SOLTAS.<br>
+          CONSTRUÍMOS O CAMINHO INTEIRO.
+        </h2>
+
+        <div class="manifesto-energy-bar">
+          <div class="manifesto-dot-pulse"></div>
+          <div class="manifesto-laser-line"></div>
+          <div class="manifesto-target-node"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         8. SEÇÃO: FAQ
+         ========================================================================== -->
+    <section class="section-pad" id="faq" style="background: #080808;">
+      <div class="container">
+
+        <div class="eyebrow-tag">06 // ESCLARECIMENTOS</div>
+        <h2 class="section-headline-large">PERGUNTAS FREQUENTES.</h2>
+
+        <div class="faq-wrapper">
+
+          <div class="faq-row">
+            <button class="faq-btn" aria-expanded="false">
+              <span>Por que contratar uma estrutura integrada em vez de profissionais avulsos?</span>
+              <span class="faq-symbol">+</span>
+            </button>
+            <div class="faq-answer">
+              Quando você contrata um profissional para o tráfego, outro para o site e tenta rodar o atendimento por conta própria, qualquer queda de vendas vira um jogo de empurra. Na GRAVV, assumimos a responsabilidade pela esteira completa: o anúncio conversa diretamente com a página, que aciona o atendimento de IA e entrega o lead pronto no CRM.
+            </div>
+          </div>
+
+          <div class="faq-row">
+            <button class="faq-btn" aria-expanded="false">
+              <span>O agente de IA pode falar algo errado para o meu cliente?</span>
+              <span class="faq-symbol">+</span>
+            </button>
+            <div class="faq-answer">
+              Não. O agente opera estritamente dentro de barreiras de segurança (guardrails) sobre documentos, tabelas e regras aprovadas pela sua diretoria. Em caso de dúvidas fora do escopo ou negociações delicadas, ele faz o transbordo imediato para sua equipe humana com todo o histórico anexado.
+            </div>
+          </div>
+
+          <div class="faq-row">
+            <button class="faq-btn" aria-expanded="false">
+              <span>A GRAVV atende apenas empresas de Brasília?</span>
+              <span class="faq-symbol">+</span>
+            </button>
+            <div class="faq-answer">
+              Nossa sede e equipe técnica estão em Brasília (DF), mas atendemos empresas em todo o território nacional. Nossos processos de alinhamento, desenvolvimento e suporte são 100% remotos, ágeis e documentados.
+            </div>
+          </div>
+
+          <div class="faq-row">
+            <button class="faq-btn" aria-expanded="false">
+              <span>Qual é o prazo médio para colocar a estrutura completa no ar?</span>
+              <span class="faq-symbol">+</span>
+            </button>
+            <div class="faq-answer">
+              A etapa de diagnóstico e arquitetura inicial é entregue nos primeiros 7 dias. A entrega e ativação da esteira completa (site + CRM + IA + tráfego) leva normalmente entre 2 e 4 semanas.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         9. SEÇÃO: CTA FINAL & DIAGNÓSTICO
+         ========================================================================== -->
+    <section class="section-pad" id="contato" style="border-top: 3px solid var(--acid);">
+      <div class="container">
+
+        <div class="final-cta-grid">
+
+          <div>
+            <div class="eyebrow-tag">07 // PRÓXIMO PASSO</div>
+            <h2 class="final-cta-big-h2">
+              COLOQUE PESO<br>
+              NA SUA PRESENÇA.
+            </h2>
+            <p class="final-cta-subtext">
+              Solicite um diagnóstico preliminar da sua presença digital, velocidade de página e eficiência de atendimento comercial.
+            </p>
+
+            <div class="company-info-block">
+              <div><strong class="text-acid">LOCALIZAÇÃO:</strong> Brasília, DF — Atendimento Nacional</div>
+              <div><strong class="text-acid">INSTAGRAM:</strong> <a href="https://instagram.com/gravv.studio" target="_blank" rel="noopener" style="color: var(--text-white); text-decoration: none;">@gravv.studio</a></div>
+              <div><strong class="text-acid">RETORNO:</strong> Análise estratégica em até 24 horas úteis.</div>
+            </div>
+          </div>
+
+          <!-- Formulário Brutalista -->
+          <div class="form-brutalist-card">
+            <form id="lead-form-main" class="form-fields-flex" novalidate>
+
+              <div class="form-group-item">
+                <label for="lead-name">Seu Nome Completo *</label>
+                <input type="text" id="lead-name" class="form-input-element" placeholder="Ex: Rodrigo Silva" required>
+              </div>
+
+              <div class="form-group-item">
+                <label for="lead-company">Nome da Sua Empresa *</label>
+                <input type="text" id="lead-company" class="form-input-element" placeholder="Ex: Silva & Associados" required>
+              </div>
+
+              <div class="form-group-item">
+                <label for="lead-contact">WhatsApp Comercial ou E-mail *</label>
+                <input type="text" id="lead-contact" class="form-input-element" placeholder="Ex: (61) 98888-7777" required>
+              </div>
+
+              <div class="form-group-item">
+                <label for="lead-focus">Principal Gargalo / Necessidade *</label>
+                <select id="lead-focus" class="form-input-element form-select-element" required>
+                  <option value="" disabled selected>Selecione uma opção...</option>
+                  <option value="Estrutura Completa (Site + CRM + IA + Tráfego)">Estrutura Completa (Site + CRM + IA + Tráfego)</option>
+                  <option value="Website de Alta Conversão">Website de Alta Conversão / Redesign</option>
+                  <option value="Agente de IA e Atendimento no WhatsApp">Agente de IA e Atendimento no WhatsApp</option>
+                  <option value="CRM e Automações Comerciais">CRM e Automações Comerciais</option>
+                  <option value="Tráfego Pago de Performance">Tráfego Pago de Performance</option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn-acid" id="submit-btn-lead" style="width: 100%;">
+                SOLICITAR DIAGNÓSTICO ESTRATÉGICO →
+              </button>
+
+              <div id="form-lead-msg" style="display: none; padding: 1.2rem; font-family: var(--font-mono); font-size: 0.95rem; line-height: 1.45;"></div>
+
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+
+      <div class="footer-inner-flex">
+
+        <div>
+          <a href="#" aria-label="GRAVV — Início">
+            <img src="GRAVV-KIT-OFICIAL/01-IDENTIDADE/01-LOGO/GRAVV-WORDMARK-WHITE.png" alt="GRAVV" class="header-logo-img">
+          </a>
+        </div>
+
+        <div class="footer-divider-line"></div>
+
+        <div class="footer-meta-tags">
+          <a href="https://instagram.com/gravv.studio" target="_blank" rel="noopener noreferrer">@gravv.studio</a>
+          <span>BRASÍLIA, DF</span>
+        </div>
+
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       SCRIPTS JAVASCRIPT: LUZ DINÂMICA DE SCROLL & INTERAÇÕES
+       ========================================================================== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+      // 1. Luz Verde Dinâmica & Laser de Scroll que acompanha a rolagem
+      const scrollGlow = document.getElementById("scroll-glow");
+      const laserProgress = document.getElementById("laser-progress");
+
+      function updateScrollEffects() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+
+        // Atualizar trilho laser
+        if (laserProgress) {
+          laserProgress.style.height = `${progress}%`;
+        }
+
+        // Mover a luz verde dinâmica suavemente pela viewport conforme rola
+        if (scrollGlow) {
+          const glowY = (scrollTop * 0.4) % (window.innerHeight);
+          scrollGlow.style.top = `${glowY + 150}px`;
+        }
+      }
+
+      window.addEventListener("scroll", updateScrollEffects, { passive: true });
+      updateScrollEffects();
+
+      // 2. FAQ Accordion
+      const faqButtons = document.querySelectorAll(".faq-btn");
+      faqButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const isOpen = btn.getAttribute("aria-expanded") === "true";
+          faqButtons.forEach(b => {
+            b.setAttribute("aria-expanded", "false");
+            if (b.nextElementSibling) b.nextElementSibling.classList.remove("open");
+          });
+          btn.setAttribute("aria-expanded", !isOpen);
+          if (btn.nextElementSibling) {
+            btn.nextElementSibling.classList.toggle("open", !isOpen);
+          }
+        });
+      });
+
+      // 3. Formulário de Diagnóstico
+      const leadForm = document.getElementById("lead-form-main");
+      const formMsg = document.getElementById("form-lead-msg");
+      const submitBtn = document.getElementById("submit-btn-lead");
+
+      if (leadForm) {
+        leadForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const name = document.getElementById("lead-name").value.trim();
+          const company = document.getElementById("lead-company").value.trim();
+          const contact = document.getElementById("lead-contact").value.trim();
+          const focus = document.getElementById("lead-focus").value;
+
+          if (!name || !company || !contact || !focus) {
+            formMsg.style.display = "block";
+            formMsg.style.background = "rgba(255, 68, 68, 0.15)";
+            formMsg.style.border = "1.5px solid #ff4444";
+            formMsg.style.color = "#ff8888";
+            formMsg.textContent = "Por favor, preencha todos os campos obrigatórios (*).";
+            return;
+          }
+
+          submitBtn.disabled = true;
+          submitBtn.textContent = "PROCESSANDO SOLICITAÇÃO...";
+
+          setTimeout(() => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "SOLICITAR DIAGNÓSTICO ESTRATÉGICO →";
+
+            formMsg.style.display = "block";
+            formMsg.style.background = "rgba(215, 255, 0, 0.12)";
+            formMsg.style.border = "1.5px solid var(--acid)";
+            formMsg.style.color = "var(--acid)";
+            formMsg.innerHTML = `
+              <strong>✓ SOLICITAÇÃO REGISTRADA COM SUCESSO!</strong><br>
+              Recebemos os dados da <strong>${company}</strong>. Nossa equipe em Brasília analisará sua operação e entrará em contato via WhatsApp em até 24h.
+            `;
+            leadForm.reset();
+          }, 600);
+        });
+      }
+
+    });
+  </script>
+</body>
+</html>
