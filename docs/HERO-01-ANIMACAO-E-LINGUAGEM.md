@@ -32,7 +32,7 @@ Os painéis são uma ilustração do processo, não depoimentos nem uma demonstr
 - O marcador, as conexões, a legenda e a barra de progresso acompanham o percurso.
 - Clique, toque e teclado continuam disponíveis como alternativas para consultar uma etapa. A próxima rolagem retoma a posição do percurso.
 - A preferência por movimentos reduzidos remove transições e efeitos, mantendo as mudanças de etapa pela rolagem.
-- No celular, os cartões ficam compactos para que a legenda permaneça visível. Sem JavaScript, a seção mantém seu conteúdo e altura naturais.
+- No celular, cada etapa ocupa um cartão grande com exemplo visual e legenda. Os cartões sobem como folhas, um por vez. O percurso móvel reserva cerca de 70% de uma tela por etapa (mínimo total de 1800 px), mantendo o avanço e retorno pela rolagem. Sem JavaScript, a seção mantém seu conteúdo e altura naturais.
 
 ## Adaptação e manutenção
 
@@ -45,3 +45,5 @@ Verificação: avanço e retorno pela rolagem, quadro visível no desktop e no c
 ## Desempenho
 
 A posição da jornada é medida no redimensionamento, evitando releituras de layout a cada rolagem. Mudanças de altura da barra do navegador móvel não recalculam o percurso. O brilho de fundo permanece estático, sem desfoque, e o progresso lateral usa transformação visual. As fontes externas carregam sem bloquear a primeira exibição. Títulos, cartões e perguntas entram uma única vez com opacidade e deslocamento curto; a preferência por movimento reduzido continua respeitada.
+
+A apresentação de um cartão por vez vale até 900 px. Os cartões fora de cena ficam inativos para teclado e leitores de tela. Em telas baixas, o título introdutório é omitido para preservar espaço para a cena. O desktop mantém a visão conjunta dos quatro cartões.

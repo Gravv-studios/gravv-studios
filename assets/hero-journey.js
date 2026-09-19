@@ -9,6 +9,7 @@
   const routes = [...story.querySelectorAll('.hero-route path')];
   const traveler = story.querySelector('.hero-traveler');
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const mobile = matchMedia('(max-width: 900px)');
   const track = document.createElement('div');
   track.className = 'hero-scroll-track';
   story.before(track);
@@ -26,12 +27,16 @@
   let start = 0;
   let distance = 1;
   let lastWidth = innerWidth;
-  function select(index) {
-    if (index === current) return;
+  function select(index, force = false) {
+    if (index === current && !force) return;
     current = index;
     cards.forEach((card, i) => {
       card.setAttribute('aria-pressed', String(i === index));
       card.classList.toggle('is-animating', i === index);
+      card.parentElement.dataset.position = i < index ? 'before' : i > index ? 'after' : 'active';
+      card.parentElement.inert = mobile.matches && i !== index;
+      if (mobile.matches && i !== index) card.parentElement.setAttribute('aria-hidden', 'true');
+      else card.parentElement.removeAttribute('aria-hidden');
     });
     const [title, description, risk] = descriptions[index];
     caption.querySelector('[data-hero-caption-step]').textContent = `A MESMA PESSOA · ETAPA ${index + 1}`;
@@ -57,7 +62,7 @@
     const preferred = (header?.getBoundingClientRect().height || 88) + 16;
     // Tall or zoomed layouts can scroll upward enough to keep the caption visible.
     top = Math.min(preferred, innerHeight - story.offsetHeight - 16);
-    distance = Math.max(440, innerHeight * .65);
+    distance = mobile.matches ? Math.max(1800, innerHeight * 2.8) : Math.max(440, innerHeight * .65);
     track.style.height = `${story.offsetHeight + distance}px`;
     track.style.setProperty('--story-top', `${top}px`);
     start = track.getBoundingClientRect().top + scrollY - top;
@@ -76,6 +81,7 @@
       if (event.key === 'End') target = cards.length - 1;
       if (target === undefined) return;
       event.preventDefault();
+      select(target);
       cards[target].focus();
     });
   });
@@ -83,6 +89,7 @@
     story.dataset.motion = reduceMotion.matches ? 'reduced' : 'full';
   }
   reduceMotion.addEventListener('change', setMotion);
+  mobile.addEventListener('change', () => { select(current, true); measure(); });
   function positionTraveler() {
     const bounds = map.getBoundingClientRect();
     const card = cards[current].parentElement.getBoundingClientRect();

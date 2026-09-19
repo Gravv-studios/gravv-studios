@@ -142,3 +142,31 @@
   .hero-text-col *, .hero-story:not([data-motion="full"]) *, .hero-story:not([data-motion="full"]) *::before, .hero-story:not([data-motion="full"]) *::after { animation: none !important; transition: none !important; }
   .hero-story:not([data-motion="full"]) .hero-step:hover, .hero-story:not([data-motion="full"]) .hero-step:focus-visible { transform: none; }
 }
+
+/* Mobile presentation: one complete scene, then the next sheet rises into place. */
+@media (max-width: 900px) {
+  .hero-scroll-enabled .hero-story-map { overflow: hidden; padding: 8px 4px; }
+  .hero-scroll-enabled .hero-story-steps { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .hero-scroll-enabled .hero-story-steps li { grid-area: 1 / 1; opacity: 0; transform: translateY(105%); transition: transform 550ms cubic-bezier(.22,1,.36,1), opacity 350ms ease; pointer-events: none; }
+  .hero-scroll-enabled .hero-story-steps li[data-position="active"] { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .hero-scroll-enabled .hero-story-steps li[data-position="before"] { transform: translateY(-105%); }
+  .hero-scroll-enabled .hero-step { min-height: 300px; padding: 22px; transform: none !important; box-shadow: none; }
+  .hero-scroll-enabled .hero-step-label { font-size: .86rem; margin-bottom: 12px; }
+  .hero-scroll-enabled .hero-step-title { font-size: clamp(1.7rem, 6.5vw, 2.2rem); min-height: 0; margin-bottom: 22px; }
+  .hero-scroll-enabled .hero-mini { display: flex; min-height: 135px; gap: 12px; }
+  .hero-scroll-enabled .hero-mini strong { font-size: 1.12rem; }
+  .hero-scroll-enabled .hero-mini-top { font-size: .82rem; }
+  .hero-scroll-enabled .hero-mini-action, .hero-scroll-enabled .hero-mini-bubble, .hero-scroll-enabled .hero-mini-task { font-size: .9rem; }
+  .hero-scroll-enabled .hero-mini-pointer { width: 30px; height: 35px; }
+  .hero-scroll-enabled .hero-route, .hero-scroll-enabled .hero-traveler { display: none; }
+  .hero-scroll-enabled .hero-story-caption { min-height: 174px; margin-top: 8px; padding-top: 12px; }
+  .hero-scroll-enabled .hero-story-caption h3 { display: none; }
+  .hero-scroll-enabled .hero-story-caption p { font-size: .92rem; }
+  .hero-scroll-enabled .hero-story-intro { margin-bottom: 6px; }
+}
+@media (max-width: 900px) and (max-height: 700px) {
+  .hero-scroll-enabled .hero-story-intro { display: none; }
+  .hero-scroll-enabled .hero-step { min-height: 250px; padding: 16px; }
+  .hero-scroll-enabled .hero-step-title { font-size: 1.55rem; margin-bottom: 12px; }
+  .hero-scroll-enabled .hero-mini { min-height: 110px; gap: 8px; }
+}
