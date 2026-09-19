@@ -27,14 +27,12 @@ Os painéis são uma ilustração do processo, não depoimentos nem uma demonstr
 
 ## Interações
 
-- O mouse destaca e amplia o painel. A legenda explica a etapa e seu risco.
-- Anúncio e site têm movimento de cursor e destaque do botão; a conversa aparece em sequência; o acompanhamento marca as ações.
-- O marcador acompanha a pessoa e os conectores verdes mostram o caminho percorrido.
-- “Ver o caminho” inicia uma única sequência, com nove segundos por etapa; ao terminar, oferece “Ver novamente”.
-- Pausar interrompe o avanço. Continuar reapresenta a etapa atual, concedendo novamente seu tempo de leitura.
-- Tocar ou clicar seleciona uma etapa; setas, Home e End também navegam entre os painéis. Escape pausa.
-- A demonstração pausa ao sair da tela ou ocultar a aba. Não começa sozinha.
-- A preferência do navegador por movimentos reduzidos é respeitada. Nessa situação, o visitante pode ativar ou reduzir os movimentos apenas na demonstração, sem alterar configurações do navegador e sem guardar a escolha.
+- A rolagem avança automaticamente por anúncio, site, atendimento e acompanhamento. Subir a página reverte as etapas.
+- O quadro permanece visível durante um percurso de aproximadamente uma altura de tela. Não há bloqueio da rolagem, reprodução por tempo ou botão para iniciar.
+- O marcador, as conexões, a legenda e a barra de progresso acompanham o percurso.
+- Clique, toque e teclado continuam disponíveis como alternativas para consultar uma etapa. A próxima rolagem retoma a posição do percurso.
+- A preferência por movimentos reduzidos remove transições e efeitos, mantendo as mudanças de etapa pela rolagem.
+- No celular, os cartões ficam compactos para que a legenda permaneça visível. Sem JavaScript, a seção mantém seu conteúdo e altura naturais.
 
 ## Adaptação e manutenção
 
@@ -42,4 +40,4 @@ Painéis em quatro colunas quando há espaço e em duas colunas nas larguras men
 
 Implementação: `assets/hero-journey.css`, `assets/hero-journey.js` e seção `#hero` no `index.html`. A revisão de clareza reduziu o texto principal em aproximadamente 47%, retirou a seção que repetia a jornada e simplificou serviços, método, dúvidas e formulário. As animações e prévias interativas do portfólio foram preservadas.
 
-Verificação: seleção das quatro etapas, navegação por teclado, avanço temporizado, pausa, preferência por movimento reduzido, ativação explícita dos movimentos e ausência de cortes na hero em celular e desktop.
+Verificação: avanço e retorno pela rolagem, quadro visível no desktop e no celular, seleção por teclado, preferência por movimentos reduzidos e links de navegação preservados.

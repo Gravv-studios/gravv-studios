@@ -11,6 +11,18 @@
 .hero-text-col .btn-acid svg { flex: 0 0 20px; }
 .hero-cta-note { margin-top: .7rem; color: var(--text-gray); font-size: .88rem; }
 .hero-story { position: relative; }
+.hero-scroll-enabled .hero-grid { align-items: start; }
+.hero-scroll-track { min-width: 0; }
+.hero-scroll-track .hero-story { position: sticky; top: var(--story-top, 104px); }
+@media (min-width: 901px) {
+  .hero-scroll-enabled .hero-text-col { position: sticky; top: calc(var(--header-h) + 40px); }
+}
+@media (max-width: 620px) {
+  .hero-scroll-enabled .hero-step { min-height: 130px; padding: 12px; }
+  .hero-scroll-enabled .hero-mini { display: none; }
+  .hero-scroll-enabled .hero-story-caption { min-height: 207px; }
+  .hero-scroll-enabled .hero-step-title { margin-bottom: 0; }
+}
 .hero-story-intro { display: flex; justify-content: space-between; gap: 1rem; align-items: center; margin-bottom: 1.1rem; }
 .hero-story-intro h2 { font-family: var(--font-sans); font-size: 1.07rem; font-weight: 600; line-height: 1.35; max-width: 24ch; }
 .hero-story-example { font-family: var(--font-mono); font-size: .64rem; letter-spacing: .07em; text-transform: uppercase; color: var(--text-gray); }

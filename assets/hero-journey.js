@@ -4,105 +4,65 @@
   if (!story) return;
   const cards = [...story.querySelectorAll('[data-hero-step]')];
   const caption = story.querySelector('[data-hero-caption]');
-  const counter = story.querySelector('[data-hero-counter]');
-  const play = story.querySelector('[data-hero-play]');
-  const previous = story.querySelector('[data-hero-previous]');
-  const next = story.querySelector('[data-hero-next]');
   const progress = story.querySelector('[data-hero-progress]');
   const map = story.querySelector('.hero-story-map');
   const routes = [...story.querySelectorAll('.hero-route path')];
   const traveler = story.querySelector('.hero-traveler');
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  const motionChoice = story.querySelector('[data-hero-motion-choice]');
-  const motionButton = story.querySelector('[data-hero-motion]');
+  const track = document.createElement('div');
+  track.className = 'hero-scroll-track';
+  story.before(track);
+  track.append(story);
+  story.closest('.hero-section').classList.add('hero-scroll-enabled');
   const descriptions = [
     ['Ela encontra sua empresa.', 'Um anúncio apresenta o que você faz a alguém que pode precisar do seu serviço.', 'Se a mensagem não é clara, ela passa direto.'],
     ['Ela entende o que você oferece.', 'No site, essa pessoa conhece seu trabalho e encontra um caminho fácil para falar com você.', 'Se o site confunde, ela sai sem entrar em contato.'],
     ['Ela pergunta. Seu negócio responde.', 'Um assistente digital ajuda nas dúvidas iniciais e encaminha a conversa para sua equipe.', 'Se a resposta demora, ela pode procurar outra empresa.'],
     ['A conversa tem um próximo passo.', 'O contato fica organizado, com o que foi conversado e um lembrete para sua equipe dar retorno.', 'Sem acompanhamento, uma proposta pode ficar esquecida.']
   ];
-  let current = 0;
-  let playing = false;
-  let started = false;
-  let finished = false;
-  let timer;
-  let animationFrame;
-  const duration = 9000;
-  story.style.setProperty('--hero-step-duration', `${duration}ms`);
-
-  function updateControls() {
-    story.dataset.playing = String(playing);
-    play.querySelector('[data-hero-play-label]').textContent = playing ? 'Pausar' : finished ? 'Ver novamente' : started ? 'Continuar' : 'Ver o caminho';
-    play.querySelector('.hero-play-icon').textContent = playing ? 'Ⅱ' : '▶';
-    play.setAttribute('aria-label', playing ? 'Pausar a demonstração' : finished ? 'Ver o caminho novamente' : started ? 'Continuar a demonstração' : 'Ver o caminho completo');
-    previous.disabled = current === 0;
-    next.disabled = current === cards.length - 1;
-  }
-
-  function stop() {
-    clearTimeout(timer);
-    playing = false;
-    updateControls();
-  }
-
-  function animateCard(index) {
-    cancelAnimationFrame(animationFrame);
-    cards.forEach(card => card.classList.remove('is-animating'));
-    progress.classList.add('hero-progress-reset');
-    // A layout read restarts the short CSS sequence only after explicit interaction.
-    void cards[index].offsetWidth;
-    animationFrame = requestAnimationFrame(() => {
-      cards[index].classList.add('is-animating');
-      progress.classList.remove('hero-progress-reset');
-    });
-  }
-
-  function select(index, animate = true) {
+  let current = -1;
+  let queued = false;
+  let top = 0;
+  function select(index) {
+    if (index === current) return;
     current = index;
-    cards.forEach((card, i) => card.setAttribute('aria-pressed', String(i === index)));
+    cards.forEach((card, i) => {
+      card.setAttribute('aria-pressed', String(i === index));
+      card.classList.toggle('is-animating', i === index);
+    });
     const [title, description, risk] = descriptions[index];
     caption.querySelector('[data-hero-caption-step]').textContent = `A MESMA PESSOA · ETAPA ${index + 1}`;
     caption.querySelector('h3').textContent = title;
     caption.querySelector('[data-hero-description]').textContent = description;
     caption.querySelector('[data-hero-risk]').textContent = risk;
-    counter.textContent = `${index + 1} de 4`;
     story.querySelectorAll('.hero-route-lit').forEach((route, i) => route.classList.toggle('is-complete', i < index));
     positionTraveler();
-    if (animate) animateCard(index);
-    updateControls();
   }
-
-  function schedule() {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      if (current === cards.length - 1) {
-        finished = true;
-        stop();
-      } else {
-        select(current + 1);
-        schedule();
-      }
-    }, duration);
+  function updateScroll() {
+    queued = false;
+    const distance = Math.max(1, track.offsetHeight - story.offsetHeight);
+    const amount = Math.max(0, Math.min(1, (top - track.getBoundingClientRect().top) / distance));
+    progress.style.transform = `scaleX(${amount})`;
+    select(Math.min(cards.length - 1, Math.floor(amount * cards.length)));
   }
-
-  function choose(index) {
-    stop();
-    finished = false;
-    select(index);
+  function queueScroll() {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(updateScroll);
   }
-
+  function measure() {
+    const header = document.querySelector('header');
+    const preferred = (header?.getBoundingClientRect().height || 88) + 16;
+    // Tall or zoomed layouts can scroll upward enough to keep the caption visible.
+    top = Math.min(preferred, innerHeight - story.offsetHeight - 16);
+    track.style.height = `${story.offsetHeight + innerHeight * 1.1}px`;
+    track.style.setProperty('--story-top', `${top}px`);
+    drawRoutes();
+    queueScroll();
+  }
   cards.forEach((card, index) => {
-    card.addEventListener('click', () => choose(index));
-    card.addEventListener('pointerenter', event => {
-      const keyboardInStory = story.contains(document.activeElement) && document.activeElement.matches(':focus-visible');
-      if (event.pointerType === 'mouse' && !playing && !keyboardInStory) {
-        finished = false;
-        select(index);
-      }
-    });
-    card.addEventListener('focus', () => {
-      if (current !== index) choose(index);
-    });
+    card.addEventListener('click', () => select(index));
+    card.addEventListener('focus', () => select(index));
     card.addEventListener('keydown', event => {
       if (event.altKey || event.ctrlKey || event.metaKey) return;
       let target;
@@ -115,46 +75,10 @@
       cards[target].focus();
     });
   });
-
-  play.addEventListener('click', () => {
-    if (playing) {
-      stop();
-      return;
-    }
-    const restart = !started || finished || current === cards.length - 1;
-    started = true;
-    finished = false;
-    playing = true;
-    select(restart ? 0 : current);
-    schedule();
-  });
-  previous.addEventListener('click', () => choose(Math.max(0, current - 1)));
-  next.addEventListener('click', () => choose(Math.min(cards.length - 1, current + 1)));
-  story.addEventListener('keydown', event => {
-    if (event.key === 'Escape') stop();
-  });
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) stop();
-  });
-  new IntersectionObserver(entries => {
-    if (!entries[0].isIntersecting && playing) stop();
-  }, { threshold: 0 }).observe(story);
-  function setMotion(full) {
-    story.dataset.motion = full ? 'full' : 'reduced';
-    motionButton.textContent = full ? 'Reduzir movimentos' : 'Ativar animação completa';
-    motionChoice.querySelector('span').textContent = full ? 'Movimentos ativados nesta demonstração.' : 'Seu navegador prefere movimentos reduzidos.';
+  function setMotion() {
+    story.dataset.motion = reduceMotion.matches ? 'reduced' : 'full';
   }
-  motionButton.addEventListener('click', () => {
-    stop();
-    setMotion(story.dataset.motion !== 'full');
-    animateCard(current);
-  });
-  reduceMotion.addEventListener('change', () => {
-    stop();
-    motionChoice.hidden = !reduceMotion.matches;
-    setMotion(!reduceMotion.matches);
-  });
-
+  reduceMotion.addEventListener('change', setMotion);
   function positionTraveler() {
     const bounds = map.getBoundingClientRect();
     const card = cards[current].parentElement.getBoundingClientRect();
@@ -184,11 +108,13 @@
     }
     positionTraveler();
   }
-  new ResizeObserver(drawRoutes).observe(map);
-  story.querySelector('.hero-story-controls').hidden = false;
-  motionChoice.hidden = !reduceMotion.matches;
-  setMotion(!reduceMotion.matches);
-  story.querySelector('.hero-story-hint').textContent = 'Passe o mouse, toque nas etapas ou veja o caminho completo.';
-  select(0, false);
-  drawRoutes();
+  story.querySelector('.hero-story-hint').textContent = 'Role para acompanhar o caminho do seu cliente.';
+  // Scroll changes are visual; focused card controls remain available to screen readers.
+  caption.setAttribute('aria-live', 'off');
+  setMotion();
+  select(0);
+  new ResizeObserver(measure).observe(story);
+  window.addEventListener('resize', measure);
+  window.addEventListener('scroll', queueScroll, { passive: true });
+  measure();
 })();
