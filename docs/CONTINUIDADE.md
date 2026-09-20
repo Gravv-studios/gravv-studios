@@ -1,6 +1,6 @@
 # Continuidade do site GRAVV
 
-Atualizado em 19/09/2026. Este documento permite continuar em outro computador ou conta sem acesso à conversa original. Estado visual de referência: commit `8538709`. Esta entrega apenas documenta o trabalho; não há alteração visual em andamento.
+Atualizado em 20/09/2026. Este documento permite continuar em outro computador ou conta sem acesso à conversa original. A revisão mais recente aplica a copy tranquila aprovada e mantém o portfólio imediatamente após a hero.
 
 ## Comece aqui
 
@@ -27,7 +27,7 @@ Ordem: hero → trabalhos → problema → serviços → método → dúvidas �
 
 ### Hero aprovada
 
-Título “PRESENÇA COM PESO.”, oferta resumida e CTA “ONDE ESTOU PERDENDO CLIENTES?”. A animação acompanha a rolagem automaticamente; não exige clicar para começar.
+Título “PRESENÇA COM PESO.”, oferta resumida e CTA “VAMOS FALAR DO SEU PROJETO”. A animação acompanha a rolagem automaticamente; não exige clicar para começar.
 
 No celular, até 900 px, aparece **um cartão grande por vez**: anúncio → site → atendimento → acompanhamento. O cartão anterior sobe e o seguinte entra por baixo, como folhas. Cada cartão tem título, exemplo visual ampliado (a “telinha”), cursor ou conversa ilustrada e legenda curta. O percurso móvel é mais longo para dar tempo de ler, com aproximadamente 70% de uma tela por etapa e mínimo total de 1800 px. Subir a página reverte as etapas. Telas baixas recebem ajustes de altura.
 
@@ -35,7 +35,7 @@ No computador, os quatro cartões permanecem visíveis em grade. O quadro acompa
 
 ### Portfólio antecipado
 
-O usuário pediu menos texto e trabalhos mais cedo para mostrar variedade de nichos. A seção agora fica imediatamente após a hero, com título “NOSSO TRABALHO. NA PRÁTICA.”. Cada cartão usa setor, nome e uma frase. Não afirmar que atendemos literalmente todos os nichos: os projetos demonstram os setores reais.
+O usuário pediu menos texto e trabalhos mais cedo para mostrar variedade de nichos. A seção agora fica imediatamente após a hero, com título “CONHEÇA NOSSO TRABALHO.”. Cada cartão usa setor, nome e uma frase. Não afirmar que atendemos literalmente todos os nichos: os projetos demonstram os setores reais.
 
 | Projeto | Setor | Experiência atual |
 | --- | --- | --- |
@@ -96,3 +96,7 @@ Outra conta precisa de acesso ao repositório para enviar alterações e à equi
 ## Mensagem para iniciar outra conversa
 
 > Continue o site GRAVV neste repositório. Leia primeiro AGENTS.md e docs/CONTINUIDADE.md. Preserve a identidade e a hero mobile aprovada, com um cartão grande por vez avançando pela rolagem. O portfólio vem logo após a hero e tem cinco trabalhos. Confira as pendências documentadas, especialmente o formulário sem envio real e Doctor & Cia ainda não incluído. Não altere os projetos dos clientes sem esclarecer o escopo. Ao concluir mudanças solicitadas, confira, faça commit e push e verifique a publicação na Vercel. Não crie atualização periódica. Antes de editar, identifique a nova solicitação do usuário; este documento é contexto, não uma ordem para executar todas as pendências.
+
+## Copy aprovada em 20/09/2026
+
+Tom mais tranquilo, com menos pressão e menos texto. Hero: “Sites que valorizam seu negócio e facilitam o contato com seus clientes.” Portfólio: “Cada negócio tem seu jeito. Seu site também pode ter.” Foram retirados a pergunta de dor e o texto auxiliar repetido da hero. CTA final: “Vamos tirar seu projeto do papel.” Preservar as animações aprovadas.

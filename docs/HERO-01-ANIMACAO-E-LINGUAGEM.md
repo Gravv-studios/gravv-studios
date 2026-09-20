@@ -6,13 +6,11 @@ Aplicada no `index.html` principal, disponível em http://127.0.0.1:8765/.
 
 **Presença com peso.**
 
-Seu cliente chega. Mas o que faz ele ficar?
+Sites que valorizam seu negócio e facilitam o contato com seus clientes.
 
-Criamos sites, anúncios e atendimento conectado para sua empresa atrair, responder e acompanhar clientes.
+**Convite:** Vamos falar do seu projeto.
 
-**Convite:** Onde estou perdendo clientes?
-
-**Apoio:** Descubra o que pode estar travando seus contatos.
+Copy tranquila aprovada em 20/09/2026, sem pergunta de dor ou apoio repetido na abertura.
 
 ## História visual
 
