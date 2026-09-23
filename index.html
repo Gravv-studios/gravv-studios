@@ -833,9 +833,9 @@
 
       <nav aria-label="Navegação Principal">
         <ul class="header-nav">
+          <li><a href="#portfolio">Portfólio</a></li>
           <li><a href="#problema">Como ajudamos</a></li>
           <li><a href="#pilares">Serviços</a></li>
-          <li><a href="#trabalhos">Trabalhos</a></li>
           <li><a href="#metodo">Método</a></li>
           <li><a href="#faq">FAQ</a></li>
         </ul>
@@ -940,11 +940,12 @@
     </section>
 
     <!-- ==========================================================================
-         3. SEÇÃO: DIAGNÓSTICO DO PROBLEMA
+         3. SEÇÃO: PORTFÓLIO / TRABALHOS SELECIONADOS
          ========================================================================== -->
-    <section class="section-pad" id="trabalhos" aria-labelledby="works-title">
+    <section class="section-pad" id="portfolio" aria-labelledby="works-title">
+      <span id="trabalhos" style="position: absolute; top: 0;" aria-hidden="true"></span>
       <div class="container">
-        <div class="eyebrow-tag">TRABALHOS SELECIONADOS</div>
+        <div class="eyebrow-tag">PORTFÓLIO · TRABALHOS SELECIONADOS</div>
         <div class="works-heading">
           <h2 class="section-headline-large" id="works-title">CONHEÇA NOSSO<br>TRABALHO.</h2>
           <p class="works-intro">Cada negócio tem seu jeito. Seu site também pode ter.</p>
@@ -1259,6 +1260,12 @@
                 </select>
               </div>
 
+              <!-- Armadilha para robôs: pessoas não veem nem preenchem este campo. -->
+              <div aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;">
+                <label for="lead-website">Não preencha</label>
+                <input type="text" id="lead-website" name="website" tabindex="-1" autocomplete="off">
+              </div>
+
               <button type="submit" class="btn-acid" id="submit-btn-lead" style="width: 100%;">
                 QUERO MELHORAR MEU NEGÓCIO →
               </button>
@@ -1336,45 +1343,72 @@
         });
       });
 
-      // 3. Formulário de Diagnóstico
+      // 3. Formulário de Diagnóstico — envia o pedido para a caixa "Leads do site" do CRM GRAVV.
+      // Se o endereço do CRM mudar (ex.: crm.gravv.com.br), troque só a linha abaixo.
+      const GRAVV_CRM_LEADS = "https://gravv-crm.vercel.app/api/lead";
       const leadForm = document.getElementById("lead-form-main");
       const formMsg = document.getElementById("form-lead-msg");
       const submitBtn = document.getElementById("submit-btn-lead");
+      const submitLabel = "QUERO MELHORAR MEU NEGÓCIO →";
+
+      const showLeadMessage = (ok, title, text) => {
+        formMsg.style.display = "block";
+        formMsg.style.background = ok ? "rgba(215, 255, 0, 0.12)" : "rgba(255, 68, 68, 0.15)";
+        formMsg.style.border = ok ? "1.5px solid var(--acid)" : "1.5px solid #ff4444";
+        formMsg.style.color = ok ? "var(--acid)" : "#ff8888";
+        formMsg.setAttribute("role", ok ? "status" : "alert");
+        formMsg.textContent = "";
+        if (title) {
+          const strong = document.createElement("strong");
+          strong.textContent = title;
+          formMsg.append(strong, document.createElement("br"));
+        }
+        formMsg.append(document.createTextNode(text));
+      };
 
       if (leadForm) {
-        leadForm.addEventListener("submit", (e) => {
+        leadForm.addEventListener("submit", async (e) => {
           e.preventDefault();
           const name = document.getElementById("lead-name").value.trim();
           const company = document.getElementById("lead-company").value.trim();
           const contact = document.getElementById("lead-contact").value.trim();
           const focus = document.getElementById("lead-focus").value;
+          const trap = document.getElementById("lead-website");
 
           if (!name || !company || !contact || !focus) {
-            formMsg.style.display = "block";
-            formMsg.style.background = "rgba(255, 68, 68, 0.15)";
-            formMsg.style.border = "1.5px solid #ff4444";
-            formMsg.style.color = "#ff8888";
-            formMsg.textContent = "Por favor, preencha todos os campos obrigatórios (*).";
+            showLeadMessage(false, "", "Por favor, preencha todos os campos obrigatórios (*).");
             return;
           }
 
           submitBtn.disabled = true;
-          submitBtn.textContent = "PROCESSANDO SOLICITAÇÃO...";
+          submitBtn.textContent = "ENVIANDO...";
 
-          setTimeout(() => {
-            submitBtn.disabled = false;
-            submitBtn.textContent = "QUERO MELHORAR MEU NEGÓCIO →";
-
-            formMsg.style.display = "block";
-            formMsg.style.background = "rgba(215, 255, 0, 0.12)";
-            formMsg.style.border = "1.5px solid var(--acid)";
-            formMsg.style.color = "var(--acid)";
-            formMsg.innerHTML = `
-              <strong>✓ SOLICITAÇÃO REGISTRADA COM SUCESSO!</strong><br>
-              Recebemos os dados da <strong>${company}</strong>. Nossa equipe em Brasília analisará sua operação e entrará em contato via WhatsApp em até 24h.
-            `;
+          try {
+            const response = await fetch(GRAVV_CRM_LEADS, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                nome: name,
+                empresa: company,
+                contato: contact,
+                interesse: focus,
+                origem: location.href.slice(0, 300),
+                website: trap ? trap.value : ""
+              })
+            });
+            let data = {};
+            try { data = await response.json(); } catch (_) {}
+            if (!response.ok) throw new Error(data.error || "");
+            showLeadMessage(true, "✓ SOLICITAÇÃO REGISTRADA COM SUCESSO!",
+              `Recebemos os dados da ${company}. Nossa equipe em Brasília analisará sua operação e entrará em contato via WhatsApp em até 24h.`);
             leadForm.reset();
-          }, 600);
+          } catch (error) {
+            showLeadMessage(false, "NÃO CONSEGUIMOS ENVIAR AGORA.",
+              (error && error.message) || "Tente de novo em instantes ou chame a gente no Instagram @gravv.studio.");
+          } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = submitLabel;
+          }
         });
       }
 
